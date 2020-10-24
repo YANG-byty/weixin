@@ -1,0 +1,49 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/wode/wode",
+    "pages/cart/cart",
+    "pages/faxian/faxian",
+    "pages/cartgory/cartgory",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "首页",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "backgroundColor": "#efefef",
+    "backgroundTextStyle": "#707070",
+    "selectedColor": "#ff0000",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/home.png",
+      "selectedIconPath": "images/home_active.png"
+    },{
+      "pagePath": "pages/cartgory/cartgory",
+      "text": "分类",
+      "iconPath": "images/category.png",
+      "selectedIconPath": "images/category_active.png"
+    },{
+      "pagePath": "pages/faxian/faxian",
+      "text": "发现",
+      "iconPath": "images/faxian.png",
+      "selectedIconPath": "images/faxian_active.png"
+    },{
+      "pagePath": "pages/cart/cart",
+      "text": "购物车",
+      "iconPath": "images/cart.png",
+      "selectedIconPath": "images/cart_active.png"
+    },{
+      "pagePath": "pages/wode/wode",
+      "text": "我的",
+      "iconPath": "images/wode.png",
+      "selectedIconPath": "images/wode_active.png"
+    }]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

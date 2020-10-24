@@ -1,0 +1,13 @@
+<!--pages/component/homeIndex/homeIndex.wxml-->
+<view class="homeIndex">
+  <swiper indicator-dots="true" interval="2000" autoplay="true" circular="true">
+    <swiper-item>
+      <view><image src="https://x.dscmall.cn/storage/data/gallery_album/original_img/9JVcPMp5TemauXCVQxnIY50u80vcxnFGfnn33CKh.png?imageView2/2/format/webp"></image></view>
+      <view><image src="https://x.dscmall.cn/storage/data/gallery_album/original_img/9JVcPMp5TemauXCVQxnIY50u80vcxnFGfnn33CKh.png?imageView2/2/format/webp"></image></view>
+      <view><image src="https://x.dscmall.cn/storage/data/gallery_album/original_img/9JVcPMp5TemauXCVQxnIY50u80vcxnFGfnn33CKh.png?imageView2/2/format/webp"></image></view>
+      <view><image src="https://x.dscmall.cn/storage/data/gallery_album/original_img/9JVcPMp5TemauXCVQxnIY50u80vcxnFGfnn33CKh.png?imageView2/2/format/webp"></image></view>
+      <view><image src="https://x.dscmall.cn/storage/data/gallery_album/original_img/9JVcPMp5TemauXCVQxnIY50u80vcxnFGfnn33CKh.png?imageView2/2/format/webp"></image></view>
+      <view><image src="https://x.dscmall.cn/storage/data/gallery_album/original_img/9JVcPMp5TemauXCVQxnIY50u80vcxnFGfnn33CKh.png?imageView2/2/format/webp"></image></view>
+    </swiper-item>
+  </swiper>
+</view>

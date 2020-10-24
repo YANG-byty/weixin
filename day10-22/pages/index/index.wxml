@@ -1,0 +1,72 @@
+<!--index.wxml-->
+<import src="../template/template.wxml"/>
+<view class="home-header" style="background-color:{{bgColor[homeIndex]}};">
+  <view class="input-warp">
+    <input  placeholder="请输入关键字"/>
+    <image src="../../images/xinxi.png" bindtap="fn"></image>
+  </view>
+</view>
+
+<!-- 导航栏 -->
+<view class="nav ">
+  <view class="nav_bg" wx:if="{{swiperIndex==0}}" style="background-color:{{bgColor[homeIndex]}};"></view>
+  <view class="nav-banner">
+    <view class="navHeader" >
+      <scroll-view class="navText" style="background-color:{{bgColor[homeIndex]}};" scroll-x="true" >
+        <view class="content-text" style="left:-{{oLeft}}px">
+          <view  wx:for="{{navDatas}}" wx:key="index" data-current="{{index}}" class="{{swiperIndex==index?'active':''}}"       bindtap="navFn">{{item.title}}</view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="nav-category " style="background-color:{{bgColor[homeIndex]}};">
+      <icon class="iconfont icon-fenlei"></icon>
+      <text>分类</text>
+    </view>
+  </view>
+</view>
+
+<!-- 内容部分 -->
+<view class="main">
+  <swiper bindchange="swiperChangeFn" current="{{swiperIndex}}" >
+    <!-- 首页-首页 -->
+    <swiper-item swiperIndex='0'>
+       <view class="container">
+          <view class="swiper">
+            <view>
+              <template is="swiper" data="{{imgDatas}}"></template>
+            </view>
+          </view>
+        </view>
+        <!-- 引入组件 -->
+        <homeIndex/>
+    </swiper-item>
+     <!-- 首页-家用电器 -->
+    <swiper-item swiperIndex='1'>
+      <homeEle/>
+    </swiper-item>
+     <!-- 首页-男装女装 -->
+    <swiper-item swiperIndex='2'>2</swiper-item>
+     <!-- 首页-鞋靴箱包 -->
+    <swiper-item swiperIndex='3'>3</swiper-item>
+     <!-- 首页-手机数码 -->
+    <swiper-item swiperIndex='4'>4</swiper-item>
+     <!-- 首页-电脑办公 -->
+    <swiper-item swiperIndex='5'>5</swiper-item>
+     <!-- 首页-家居家纺 -->
+    <swiper-item swiperIndex='6'>6</swiper-item>
+     <!-- 首页-个人化妆 -->
+    <swiper-item swiperIndex='7'>7</swiper-item>
+
+    <!-- <swiper-item  wx:for="{{navDatas}}" wx:key="index">{{item.title}}</swiper-item> -->
+  </swiper>
+</view>
+
+<!-- 
+<view class="container">
+  <view class="swiper">
+    <view>
+      <template is="swiper" data="{{imgDatas}}"></template>
+    </view>
+  </view>
+</view> -->
+

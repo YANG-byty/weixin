@@ -1,0 +1,57 @@
+<!--pages/component/homeEle/homeEle.wxml-->
+
+<view class="homeEle">
+  <view class="homeEle-banner">
+    <view class="top-catalog">
+      <view class="item">
+        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
+        <view class="item-text">厨房电器</view>
+      </view>
+      <view class="item">
+        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
+        <view class="item-text">厨房电器</view>
+      </view> 
+      <view class="item">
+        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
+        <view class="item-text">厨房电器</view>
+      </view> 
+      <view class="item">
+        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
+        <view class="item-text">厨房电器</view>
+      </view>
+      <view class="item">
+        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
+        <view class="item-text">厨房电器</view>
+      </view>
+    </view>
+    <view class="category-brand">
+      <view class="category-title">品牌精选</view>
+      <view class="brand-list">
+        <view class="brand-item">
+          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
+          <view class="brand-text">梦特娇</view>
+        </view>
+        <view class="brand-item">
+          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
+          <view class="brand-text">梦特娇</view>
+        </view>
+        <view class="brand-item">
+          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072329183966195.jpg"></image></view>
+          <view class="brand-text">梦特娇</view>
+        </view>
+        <view class="brand-item">
+          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
+          <view class="brand-text">梦特娇</view>
+        </view>
+        <view class="brand-item">
+          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
+          <view class="brand-text">梦特娇</view>
+        </view>
+        <view class="brand-item">
+          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
+          <view class="brand-text">梦特娇</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

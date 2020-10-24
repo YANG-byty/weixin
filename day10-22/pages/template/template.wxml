@@ -1,0 +1,8 @@
+<!--pages/template/template.wxml-->
+<template name="swiper">
+  <view>
+      <swiper indicator-active-color='#efefef'  indicator-dots="true" interval="2000" autoplay="true" circular="true" bindchange="homeIndexFn" >
+        <swiper-item wx:for="{{imgDatas}}" wx:key="index"><image src="{{item.imgSrc}}"></image></swiper-item>
+     </swiper>  
+  </view>
+</template>
