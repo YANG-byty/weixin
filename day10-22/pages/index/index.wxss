@@ -65,11 +65,11 @@
   width: 80%;
 }
 .nav .nav-banner{
-  position: absolute;
+  position: fixed;
   z-index: 99;
   display: flex;
   width: 100%;
-  
+  top:50px;
 }
 .navHeader .navText{
   width: 100%;
@@ -101,4 +101,13 @@
  margin-top: 100rpx;
  position: relative;
  top: 83rpx;
+ bottom: 0;
+}
+
+.main .main-swiper{
+  /* position: absolute;
+  top: 100px;
+  bottom: 0;
+  height: auto; */
+  height: 3000px ;
 }

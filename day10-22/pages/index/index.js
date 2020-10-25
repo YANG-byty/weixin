@@ -6,8 +6,10 @@ Page({
   data:{
     bgColor:['#E43124','#F34646','#3C81FF','#028379','#4091FF'],
     navDatas:[{
+      cat_id:20,
       title:'首页'
     },{
+      cat_id:858,
       title:'家用电器'
     },{
       title:'男装女装'
@@ -41,6 +43,9 @@ Page({
     homeIndex:0, //首页-首页轮播图索引
     swiperIndex:0, //nav索引
     oLeft:0,
+    mainHeight:0,
+    kitchenData:[],//厨房电器数据
+    productDatas:[],//家用电器页面的品牌精选数据
   },
   //事件处理函数
   bindViewTap: function() {
@@ -62,13 +67,53 @@ Page({
     })
   },
   navFn(e){
+    // console.log(e);
+    // https://x.dscmall.cn/api/visual/visual_second_category?cat_id=858
+    // https://x.dscmall.cn/api/catalog/goodslist
+    
+    var cat_id=e.target.dataset.cat_id;
+      if(cat_id==858){
+        wx.request({
+          url: `https://x.dscmall.cn/api/visual/visual_second_category`,
+          data:{
+            cat_id:cat_id
+          },
+          success:(res)=>{
+            console.log(res.data.data);
+            this.setData({
+              kitchenData:res.data
+            })
+          }
+        }) 
+        wx.request({
+          url: `https://x.dscmall.cn/api/catalog/goodslist`,
+          method: "POST",
+          data: {
+            cat_id: cat_id,
+            page: 2,
+            size: 10,
+          },
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          success:(res)=>{
+            console.log(res.data);
+            this.setData({
+              productDatas:res.data
+            })
+          },
+          fail:(resle)=>{
+            console.log(resle);   
+          }
+        }) 
+    }   
+    //改变nav中的索引使其移动
     this.setData({
       swiperIndex:e.currentTarget.dataset.current
     })
   },
 
   swiperChangeFn(e){
-    // console.log(e);
     this.setData({
       swiperIndex:e.detail.current
     })
@@ -77,10 +122,31 @@ Page({
         oLeft:(e.detail.current-2)*90
       })
     }
+    
+    if(e.detail.current==1 ){
+      wx.request({
+        url: `https://x.dscmall.cn/api/visual/visual_second_category?cat_id=858`,
+        success:(res)=>{
+          console.log(res.data.data);
+          this.setData({
+            kitchenData:res.data
+          })
+        }
+      })
+    }
+
   },
+  onLoad: function (options) {
 
+    wx.getSystemInfo({
+      success:(result)=>{
+        // console.log(result);
+        this.setData({
+          mainHeight:result.windowHeight
+        })
+      }
+    })
 
-  onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

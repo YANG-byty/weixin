@@ -14,7 +14,7 @@
     <view class="navHeader" >
       <scroll-view class="navText" style="background-color:{{bgColor[homeIndex]}};" scroll-x="true" >
         <view class="content-text" style="left:-{{oLeft}}px">
-          <view  wx:for="{{navDatas}}" wx:key="index" data-current="{{index}}" class="{{swiperIndex==index?'active':''}}"       bindtap="navFn">{{item.title}}</view>
+          <view  wx:for="{{navDatas}}" wx:key="index" data-current="{{index}}" data-cat_id='{{item.cat_id}}' class="{{swiperIndex==index?'active':''}}"       bindtap="navFn">{{item.title}}</view>
         </view>
       </scroll-view>
     </view>
@@ -27,7 +27,8 @@
 
 <!-- 内容部分 -->
 <view class="main">
-  <swiper bindchange="swiperChangeFn" current="{{swiperIndex}}" >
+  <!-- style="height:{{mainHeight}}px" -->
+  <swiper bindchange="swiperChangeFn" class="main-swiper" current="{{swiperIndex}}"   >
     <!-- 首页-首页 -->
     <swiper-item swiperIndex='0'>
        <view class="container">
@@ -42,7 +43,7 @@
     </swiper-item>
      <!-- 首页-家用电器 -->
     <swiper-item swiperIndex='1'>
-      <homeEle/>
+      <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}"/>
     </swiper-item>
      <!-- 首页-男装女装 -->
     <swiper-item swiperIndex='2'>2</swiper-item>

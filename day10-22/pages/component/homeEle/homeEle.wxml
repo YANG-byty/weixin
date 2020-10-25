@@ -3,53 +3,31 @@
 <view class="homeEle">
   <view class="homeEle-banner">
     <view class="top-catalog">
-      <view class="item">
-        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
-        <view class="item-text">厨房电器</view>
-      </view>
-      <view class="item">
-        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
-        <view class="item-text">厨房电器</view>
-      </view> 
-      <view class="item">
-        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
-        <view class="item-text">厨房电器</view>
-      </view> 
-      <view class="item">
-        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
-        <view class="item-text">厨房电器</view>
-      </view>
-      <view class="item">
-        <view class="item-img"><image src="https://x.dscmall.cn/storage/data/touch_icon/15985734207245.jpg"></image></view>
-        <view class="item-text">厨房电器</view>
+      <view class="item" wx:for="{{kitchenData.data.category}}" wx:key="index">
+        <view class="item-img"><image src="{{item.touch_icon}}"></image></view>
+        <view class="item-text">{{item.cat_name}}</view>
       </view>
     </view>
     <view class="category-brand">
       <view class="category-title">品牌精选</view>
       <view class="brand-list">
-        <view class="brand-item">
-          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
-          <view class="brand-text">梦特娇</view>
+        <view class="brand-item" wx:for="{{kitchenData.data.brand}}" wx:key="index">
+          <view class="brand-img"><image src="{{item.brand_logo}}"></image></view>
+          <view class="brand-text">{{item.brand_name}}</view>
         </view>
-        <view class="brand-item">
-          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
-          <view class="brand-text">梦特娇</view>
+      </view>
+    </view>
+    <view class="product-list">
+      <view class="product-item" wx:for="{{productDatas.data}}" wx:key="index">
+        <view class="product-img">
+          <image src="{{item.goods_img}}"></image>
         </view>
-        <view class="brand-item">
-          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072329183966195.jpg"></image></view>
-          <view class="brand-text">梦特娇</view>
-        </view>
-        <view class="brand-item">
-          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
-          <view class="brand-text">梦特娇</view>
-        </view>
-        <view class="brand-item">
-          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
-          <view class="brand-text">梦特娇</view>
-        </view>
-        <view class="brand-item">
-          <view class="brand-img"><image src="https://x.dscmall.cn/storage/data/brandlogo/1490072313895957648.jpg"></image></view>
-          <view class="brand-text">梦特娇</view>
+        <view class="product-title">{{item.goods_name}}</view>
+        <view class="product-price">￥{{item.shop_price}}</view>
+        <view class="product-outer">
+          <text class="outer-breand">自营</text>
+          <text class="outer-num">{{item.sales_volume}}人选中购买</text>
+          <text class="iconfont icon-gouwuche1"></text>
         </view>
       </view>
     </view>
