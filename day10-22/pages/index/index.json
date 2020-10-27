@@ -5,6 +5,8 @@
   "navigationBarTextStyle":"black",
   "usingComponents": {
     "homeIndex":"../component/homeIndex/homeIndex",
-    "homeEle":"../component/homeEle/homeEle"
+    "homeEle":"../component/homeEle/homeEle",
+    "goodsList":"../component/goodsList/goodsList",
+    "homeMain":"../component/homeMain/homeMain"
   }
 }

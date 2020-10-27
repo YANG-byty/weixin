@@ -1,0 +1,13 @@
+<!--pages/component/homeMain/homeMain.wxml-->
+<view class="homeMain">
+  <view class="nav-swiper">
+    <swiper class="homeMain-swiper">
+      <swiper-item class="swiper-slide" wx:for="{{swiperSlideLists}}" wx:key="index">
+        <a href="javascript:;" wx:for="{{item}}"  wx:key="index">
+          <image src="{{item.img}}"></image>
+          <text>{{item.desc}}</text>
+        </a>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

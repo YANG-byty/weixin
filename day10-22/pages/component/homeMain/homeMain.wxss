@@ -1,0 +1,30 @@
+/* pages/component/homeMain/homeMain.wxss */
+.homeMain{
+  width: 100%;
+  height: auto;
+}
+.homeMain .nav-swiper .homeMain-swiper{
+  height:400rpx;
+}
+.homeMain .nav-swiper{
+  width: 100%;
+}
+.homeMain .nav-swiper .swiper-slide{
+  display: flex;
+  flex-wrap: wrap;
+}
+.homeMain .nav-swiper .swiper-slide a{
+  display: block;
+  width: 142rpx;
+  height: 196rpx;
+}
+.homeMain .nav-swiper .swiper-slide a image{
+  width: 142rpx;
+  height: 142rpx;
+}
+.homeMain .nav-swiper .swiper-slide a text{
+  font-size: 26rpx;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
