@@ -3,17 +3,16 @@
 <view class="home-header" style="background-color:{{bgColor[homeIndex]}};">
   <view class="input-warp">
     <input placeholder="请输入关键字" />
-    <image src="../../images/xinxi.png" bindtap="fn"></image>
+    <image src="/images/xinxi.png" bindtap="fn"></image>
   </view>
 </view>
 
 <!-- 导航栏 -->
 <view class="nav ">
-  <view class="nav_bg" wx:if="{{swiperIndex==0}}" style="background-color:{{bgColor[homeIndex]}};opacity: {{opacity}};"></view>
   <view class="nav-banner">
     <view class="navHeader">
-      <scroll-view class="navText" style="background-color:{{bgColor[homeIndex]}};" scroll-x="true">
-        <view class="content-text" style="left:-{{oLeft}}px">
+      <scroll-view class="navText" scroll-left="{{oLeft}}" scroll-with-animation="true" style="background-color:{{bgColor[homeIndex]}};" scroll-x="true">
+        <view class="content-text">
           <view wx:for="{{navDatas}}" wx:key="index" data-current="{{index}}"
             class="{{swiperIndex==index?'active':''}}" bindtap="navFn">{{item.title}}</view>
         </view>
@@ -27,18 +26,19 @@
 </view>
 
 <!-- 内容部分 -->
-<view class="main">
+<view class="main" style="background-color:#efefef">
+   <view class="nav_bg" wx:if="{{swiperIndex==0}}" style="background-color:{{bgColor[homeIndex]}}; {{opacity.opacity}}{{opacity.transition}}"></view>
   <swiper bindchange="swiperChangeFn" style="height:{{mainHeight}}px" current="{{swiperIndex}}">
     <!-- 首页-首页 -->
-    <swiper-item swiperIndex='0'>
+    <swiper-item swiperIndex='0' >
       <view class="container">
         <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollIndexFn' bindscroll="scrollTopFn" >
         <view class="swiper">
-          <view>
-            <template is="swiper" data="{{imgDatas}}"></template>
+          <view wx:if="{{flag}}">
+            <template is="swiper" data="{{swiperLists}}"></template>
           </view>
         </view>
-        <homeMain swiperSlideLists="{{swiperSlideLists}}"></homeMain>
+        <homeMain swiperSlideLists="{{swiperSlideLists}}" hotDatas="{{hotDatas}}" seckillDatas="{{seckillDatas}}"></homeMain>
         <goodsList goodsList="{{goodsList}}"></goodsList>
         </scroll-view>
       </view>
@@ -46,7 +46,7 @@
       <homeIndex />
     </swiper-item>
     <!-- 首页-家用电器 -->
-    <swiper-item swiperIndex='1'>
+    <swiper-item swiperIndex='1' >
       <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollEleFn'>
         <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}" page="{{page}}"/>
       </scroll-view>

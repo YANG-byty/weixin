@@ -6,56 +6,37 @@ Page({
   data: {
     bgColor: ['#E43124', '#F34646', '#3C81FF', '#028379', '#4091FF'],
     cat_id: ['', '858', '6', '8', '3', '4', '5', '860'],
+    flag:true,  //首页轮播图开关
     navDatas: [{
       title: '首页'
     }, {
-      cat_id: 858,
       title: '家用电器'
     }, {
-      cat_id: 6,
       title: '男装女装'
     }, {
-      cat_id: 8,
       title: '鞋靴箱包'
     }, {
-      cat_id: 3,
       title: '手机数码'
     }, {
-      cat_id: 4,
       title: '电脑办公'
     }, {
-      cat_id: 5,
       title: '家居家纺'
     }, {
-      cat_id: 860,
       title: '个人化妆'
     }],
-    imgDatas: [{
-      id: 1,
-      imgSrc: 'https://x.dscmall.cn/storage/data/gallery_album/177/original_img/177_P_1597978394783.jpg'
-    }, {
-      id: 2,
-      imgSrc: 'https://x.dscmall.cn/storage/data/gallery_album/177/original_img/177_P_1597978396430.jpg'
-    }, {
-      id: 3,
-      imgSrc: 'https://x.dscmall.cn/storage/data/gallery_album/177/original_img/177_P_1597978397105.jpg'
-    }, {
-      id: 4,
-      imgSrc: 'https://x.dscmall.cn/storage/data/gallery_album/177/original_img/177_P_1597978395260.jpg'
-    }, {
-      id: 5,
-      imgSrc: 'https://x.dscmall.cn/storage/data/gallery_album/177/original_img/177_P_1597978395241.jpg'
-    }],
+    swiperLists:[], //首页轮播图数据
     homeIndex: 0, //首页-首页轮播图索引
     swiperIndex: 0, //nav索引
-    oLeft: 0,
-    opacity:1,
-    mainHeight: 0,
+    oLeft: 0,  //首页头部导航栏移动
+    opacity:{},
+    mainHeight: 0,  
     goodsList:[],//首页-首页列表数据
     kitchenData: [],//厨房电器数据
     productDatas: [],//家用电器页面的品牌精选数据
     page: 1,
     swiperSlideLists:[],//首页潮流服饰数据
+    hotDatas:[],  //首页商城热点
+    seckillDatas:{},  //限时秒杀
   },
   //事件处理函数
   bindViewTap: function () {
@@ -81,6 +62,15 @@ Page({
     // https://x.dscmall.cn/api/visual/visual_second_category?cat_id=858
     // https://x.dscmall.cn/api/catalog/goodslist
     //改变nav中的索引使其移动
+    if(e.currentTarget.dataset.current==0){
+      this.setData({
+        flag:true
+      })
+    }else{
+      this.setData({
+        flag:false
+      })
+    }
     this.setData({
       swiperIndex: e.currentTarget.dataset.current
     })
@@ -255,9 +245,13 @@ postListDatas(){
   scrollTopFn(e){
     // console.log(e.detail.scrollTop);
     var scrollTop=e.detail.scrollTop;
-    if(scrollTop>50){
+    if(scrollTop>40){
+      var obj={
+        opacity:'opacity:0;',
+        transition:'transition:all 1s;'
+      }
       this.setData({
-        opacity:0
+        opacity:obj
       })
     }else{
       this.setData({
@@ -267,10 +261,11 @@ postListDatas(){
   },
 
   onLoad: function (options) {
-    //首页列表数据
+    
     wx.showLoading({
       title: '数据加载中...',
     })
+    //首页列表数据
     // https://x.dscmall.cn/api/goods/type_list?page=1&size=10&type=is_best
     wx.request({
       url: 'https://x.dscmall.cn/api/goods/type_list',
@@ -289,7 +284,7 @@ postListDatas(){
         }
       }
     })
-
+    // 首页轮播图下面潮流服饰数据
     wx.request({
       url: 'https://x.dscmall.cn/api/visual/view',
       method:'post',
@@ -300,8 +295,12 @@ postListDatas(){
         device: 'h5'
       },
       success:(res)=>{
-        
+       
         var datas=JSON.parse(res.data.data.data)
+        // console.log(datas)
+        this.setData({
+          swiperLists:datas[2].data.list
+        })
         var arr=[];
         var arrNum=10;
         for(var i=0;i<datas[3].data.list.length;i+=arrNum){
@@ -314,6 +313,39 @@ postListDatas(){
         })
       }
     })
+
+    // 首页商城热点数据
+    wx.request({
+      url: 'https://x.dscmall.cn/api/visual/article',
+      method:'post',
+      header:'content-type:application/x-www-form-urlencoded',
+      data:{
+        cat_id: 20,
+        num: 10
+      },
+      success:(res)=>{
+        // console.log(res.data.data);
+        this.setData({
+          hotDatas:res.data.data
+        })
+      }
+    })
+    // 限时秒杀
+    wx.request({
+      url:"https://x.dscmall.cn/api/visual/visual_seckill",
+      data:{
+        id: 27,
+        tomorrow: 0
+      },
+      success:(res)=>{
+        console.log(res);
+        this.setData({
+          seckillDatas:res.data.data
+        })
+      }
+    })
+
+
 
     wx.getSystemInfo({
       success: (result) => {
@@ -357,5 +389,9 @@ postListDatas(){
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  onUnload:function(){
+   
   }
+
 })

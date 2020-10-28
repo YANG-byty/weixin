@@ -1,13 +1,79 @@
 <!--pages/component/homeMain/homeMain.wxml-->
 <view class="homeMain">
+
   <view class="nav-swiper">
+    <!-- 潮流服饰 -->
     <swiper class="homeMain-swiper">
       <swiper-item class="swiper-slide" wx:for="{{swiperSlideLists}}" wx:key="index">
-        <a href="javascript:;" wx:for="{{item}}"  wx:key="index">
+        <a href="javascript:;" wx:for="{{item}}" wx:key="index">
           <image src="{{item.img}}"></image>
           <text>{{item.desc}}</text>
         </a>
       </swiper-item>
     </swiper>
+    <!-- 商城热点 -->
+    <view class="announcement">
+      <view class="hotspot-img">
+        <image src="https://x.dscmall.cn/storage/data/gallery_album/177/original_img/177_P_1597978466633.png"></image>
+      </view>
+      <swiper class="hotspot-swiper" autoplay='true' vertical='true' interval='2000' circular='true'>
+        <swiper-item class="hotspot-text" wx:for="{{hotDatas}}" wx:key="index">{{item.title}}</swiper-item>
+      </swiper>
+      <view class="icon-img">
+        <view class="iconfont icon-arrow-left"></view>
+      </view>
+    </view>
+  </view>
+  <view class="desc-img">
+    <image
+      src="https://x.dscmall.cn/storage/data/gallery_album/original_img/CPvH5WHHbF0EoG9XjRQbbT3knMVCeEt9DlYGQhJM.png?imageView2/2/format/webp">
+    </image>
+  </view>
+  <!-- 限时秒杀 -->
+  <view class="count-down">
+    <view class="seckill-header">
+      <view class="header-top">
+        <view class="tit-img">
+          <image
+            src="https://x.dscmall.cn/storage/data/gallery_album/177/original_img/177_P_1597978468241.png?imageView2/2/format/webp">
+          </image>
+        </view>
+        <view class="data">
+          <view class="data-text">距离还剩：</view>
+          <view class="data-time">
+            <view>{{hh}}</view>:<view>{{mm}}</view>:<view>{{ss}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="header-time-slot" >
+        <view class="time-item {{index==flag?'active':''}}" bindtap="seckilFn" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{seckillDatas.time_list}}" wx:key="index">
+          <view>{{item.title}}</view>
+          <view>{{item.status?'抢购中':'即将开始'}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="seckill-goods-list">
+      <scroll-view scroll-x="true" >
+        <view class="scrollView">
+          <view class="swiper-slide" wx:for="{{seckillDatas.seckill_list}}" wx:key="index">
+            <view class="slide-img">
+            <image class="seckil" src="/images/seckill-tag.png"></image>
+            <image
+              src="{{item.goods_thumb}}">
+            </image>
+          </view>
+          <view class="goods-info">
+            <view class="goods-title">{{item.goods_name}}</view>
+            <view class="goods-price">{{item.sec_price_formated}}</view>
+            <view class="currency-price">{{item.market_price_formated}}</view>
+          </view>
+        </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="more">
+      <view>查看更多秒杀商品</view>
+      <view class="iconfont icon-arrow-left"></view>
+    </view>
   </view>
 </view>

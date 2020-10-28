@@ -17,9 +17,11 @@
 }
  .product-list .product-item .product-img{
   height: 174px;
+  width:100%;
 }
  .product-list .product-item .product-img image{
   height: 100%;
+  width:100%;
 }
  .product-list .product-item .product-title{
   width: 100%;
