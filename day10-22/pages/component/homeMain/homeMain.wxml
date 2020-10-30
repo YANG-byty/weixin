@@ -46,7 +46,7 @@
         </view>
       </view>
       <view class="header-time-slot" >
-        <view class="time-item {{index==flag?'active':''}}" bindtap="seckilFn" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{seckillDatas.time_list}}" wx:key="index">
+        <view class="time-item {{index==flag?'active':''}}" bindtap="seckilFn" data-id="{{item.id}}" data-index="{{index}}"  wx:for="{{seckillDatas.time_list}}" wx:key="index">
           <view>{{item.title}}</view>
           <view>{{item.status?'抢购中':'即将开始'}}</view>
         </view>

@@ -14,8 +14,6 @@ Component({
    */
   data: {
     flag:0,
-    begin_time:0,
-    end_time:0,
     hh:'00',
     mm:'00',
     ss:'00'
@@ -26,17 +24,18 @@ Component({
    */
   methods: {
     msFn(){
+      var endtime=this.properties.seckillDatas.time_list[0].frist_end_time;
+      
       var data=new Date();
       var time=data.getTime();
-      var data1=new Date('2020-10-28 23:59:59');
+
+      var data1=new Date(endtime);
       var time1=data1.getTime();
       var difference=time1-time;
-
       if(difference!=0){
         var h=Math.floor(difference/1000/60/60)%24;
         var m=Math.floor(difference/1000/60)%60;
         var s=Math.floor(difference/1000)%60;
-        
         this.setData({
           hh:h<10?"0"+h:h,
           mm:m<10?"0"+m:m,
@@ -45,10 +44,8 @@ Component({
       }
     },
     seckilFn(e){
-      console.log(e.currentTarget.dataset);
       this.setData({
         flag:e.currentTarget.dataset.index,
-        seckilId:e.currentTarget.dataset.id,
       })
      
       var tomorrowI=0;
@@ -73,6 +70,7 @@ Component({
   },
   //初次加载组件时执行
   attached: function () {
+    // this.seckilFn();
     setInterval(() => {
       this.msFn();
     }, 1000);

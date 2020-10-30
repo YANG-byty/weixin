@@ -1,0 +1,60 @@
+/* 商品列表 */
+.product-list {
+  width: 100%;
+  height: auto;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+
+.product-list .list-child {
+  width: 49%;
+  float: left;
+}
+
+.product-list .list-child:nth-child(2) {
+  margin-left: 14rpx;
+}
+
+.product-list .list-child:nth-child(2) .product-item:nth-child(3n+3) .product-img,
+.product-price {
+  margin: 30rpx 0;
+}
+
+.product-list .product-item {
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.product-list .product-item .product-img {
+  height: 174px;
+  width: 100%;
+}
+
+.product-list .product-item .product-img image {
+  height: 100%;
+  width: 100%;
+}
+
+.product-list .product-item .product-title {
+  width: 100%;
+  height: 37px;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.product-list .product-item .product-price {
+  height: 32px;
+  line-height: 32px;
+  color: red;
+  font-weight: bold;
+  width: 90%;
+  margin: 0 auto;
+}

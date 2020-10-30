@@ -4,16 +4,28 @@
   width: 100%;
   height: auto;
   margin-top: 10px;
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-
+  justify-content: space-between; */
+  
+}
+.product-list .list-child{
+  width: 49%;
+  float: left;
+ 
+}
+.product-list .list-child:nth-child(2){
+  margin-left: 14rpx;
+}
+.product-list .list-child:nth-child(2) .product-item:nth-child(3n+3) .product-img,.product-price{
+  margin: 30rpx 0;
 }
  .product-list .product-item{
-  width: 49%;
+  width:100%;
   background-color: white;
   border-radius: 10px;
   margin-bottom: 10px;
+  overflow: hidden;
 }
  .product-list .product-item .product-img{
   height: 174px;

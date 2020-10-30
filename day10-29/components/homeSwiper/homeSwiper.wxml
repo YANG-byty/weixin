@@ -1,0 +1,11 @@
+<!--components/homeSwiper/homeSwiper.wxml-->
+<view class="home-swiper">
+  <swiper class="swiper-wrap" autoplay='true' circular='true'>
+    <swiper-item>
+      <image src="/assets/images/swiper1.png"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/assets/images/swiper2.png"></image>
+    </swiper-item>
+  </swiper>
+</view>

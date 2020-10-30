@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "homeSearch": "/components/homeSearch/homeSearch",
+    "homeSwiper": "/components/homeSwiper/homeSwiper",
+    "goodsList":"/components/goodsList/goodsList"
+  },
+  "navigationStyle": "custom"
+}

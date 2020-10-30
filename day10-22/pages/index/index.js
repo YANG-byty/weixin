@@ -37,6 +37,8 @@ Page({
     swiperSlideLists:[],//首页潮流服饰数据
     hotDatas:[],  //首页商城热点
     seckillDatas:{},  //限时秒杀
+    odd:[],
+    even:[],
   },
   //事件处理函数
   bindViewTap: function () {
@@ -113,9 +115,17 @@ Page({
               title: '没有更多商品了！',
             })
           }else{
+            //瀑布流
+          for (let i = 0; i < res.data.data.length; i++) {
+            if((i+1)%2==0){
+              this.data.goodsList[0].push(res.data.data[i]);
+            }else{
+              this.data.goodsList[1].push(res.data.data[i]);
+            }
+          }
             wx.hideLoading();
             this.setData({
-              goodsList:this.data.goodsList.concat(res.data.data)
+              goodsList:this.data.goodsList
             })
           }
         }
@@ -278,8 +288,18 @@ postListDatas(){
         // console.log(res.data);
         if(res.statusCode==200){
           wx.hideLoading();
+          //瀑布流
+          for (let i = 0; i < res.data.data.length; i++) {
+            if((i+1)%2==0){
+              this.data.even.push(res.data.data[i]);
+            }else{
+              this.data.odd.push(res.data.data[i]);
+            }
+          }
+          this.data.goodsList.push(this.data.even);
+          this.data.goodsList.push(this.data.odd);
           this.setData({
-            goodsList:res.data.data
+            goodsList:this.data.goodsList
           })
         }
       }
@@ -338,7 +358,7 @@ postListDatas(){
         tomorrow: 0
       },
       success:(res)=>{
-        console.log(res);
+        // console.log(res);
         this.setData({
           seckillDatas:res.data.data
         })

@@ -1,0 +1,11 @@
+<!--pages/home/home.wxml-->
+<view class="home">
+  <scroll-view scroll-y="true" style="height:700px" bindscroll="homeScrollFn">
+    <homeSearch opacity="{{opacity}}" color="{{color}}"></homeSearch>
+    <homeSwiper></homeSwiper>
+    <view class="home-area">
+      <goodsList goodsList="{{goodsList}}"></goodsList>
+    </view>
+  </scroll-view>
+
+</view>

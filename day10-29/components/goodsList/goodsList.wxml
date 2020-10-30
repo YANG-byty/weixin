@@ -1,4 +1,4 @@
-<!--pages/component/goodsList/goodsList.wxml-->
+<!--components/goodsList/goodsList.wxml-->
 <view class="product-list">
   <view class="list-child" wx:for="{{goodsList}}" wx:key="index">
     <view class="product-item" wx:for="{{item}}" wx:key="index">

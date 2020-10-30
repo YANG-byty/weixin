@@ -11,10 +11,11 @@
 <view class="nav ">
   <view class="nav-banner">
     <view class="navHeader">
-      <scroll-view class="navText" scroll-left="{{oLeft}}" scroll-with-animation="true" style="background-color:{{bgColor[homeIndex]}};" scroll-x="true">
+      <scroll-view class="navText" scroll-left="{{oLeft}}"   scroll-with-animation="true"
+        style="background-color:{{bgColor[homeIndex]}};" scroll-x="true">
         <view class="content-text">
-          <view wx:for="{{navDatas}}" wx:key="index" data-current="{{index}}"
-            class="{{swiperIndex==index?'active':''}}" bindtap="navFn">{{item.title}}</view>
+          <view wx:for="{{navDatas}}" wx:key="index" data-current="{{index}}" class="{{swiperIndex==index?'active':''}}"
+            bindtap="navFn">{{item.title}}</view>
         </view>
       </scroll-view>
     </view>
@@ -27,64 +28,74 @@
 
 <!-- 内容部分 -->
 <view class="main" style="background-color:#efefef">
-   <view class="nav_bg" wx:if="{{swiperIndex==0}}" style="background-color:{{bgColor[homeIndex]}}; {{opacity.opacity}}{{opacity.transition}}"></view>
+  <view class="nav_bg" wx:if="{{swiperIndex==0}}"
+    style="background-color:{{bgColor[homeIndex]}}; {{opacity.opacity}}{{opacity.transition}}"></view>
   <swiper bindchange="swiperChangeFn" style="height:{{mainHeight}}px" current="{{swiperIndex}}">
     <!-- 首页-首页 -->
-    <swiper-item swiperIndex='0' >
+    <swiper-item swiperIndex='0'>
       <view class="container">
-        <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollIndexFn' bindscroll="scrollTopFn" >
-        <view class="swiper">
-          <view wx:if="{{flag}}">
-            <template is="swiper" data="{{swiperLists}}"></template>
+        <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollIndexFn'
+          bindscroll="scrollTopFn">
+          <view class="swiper">
+            <view wx:if="{{flag}}">
+              <template is="swiper" data="{{swiperLists}}"></template>
+            </view>
           </view>
-        </view>
-        <homeMain swiperSlideLists="{{swiperSlideLists}}" hotDatas="{{hotDatas}}" seckillDatas="{{seckillDatas}}"></homeMain>
-        <goodsList goodsList="{{goodsList}}"></goodsList>
+          <homeMain swiperSlideLists="{{swiperSlideLists}}" hotDatas="{{hotDatas}}" seckillDatas="{{seckillDatas}}">
+          </homeMain>
+          <goodsList goodsList="{{goodsList}}"></goodsList>
         </scroll-view>
       </view>
       <!-- 引入组件 -->
       <homeIndex />
     </swiper-item>
     <!-- 首页-家用电器 -->
-    <swiper-item swiperIndex='1' >
+    <swiper-item swiperIndex='1'>
       <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollEleFn'>
-        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}" page="{{page}}"/>
+        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}"
+          page="{{page}}" />
       </scroll-view>
     </swiper-item>
     <!-- 首页-男装女装 -->
     <swiper-item swiperIndex='2'>
       <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollMakeFn'>
-        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}" page="{{page}}"/>
+        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}"
+          page="{{page}}" />
       </scroll-view>
     </swiper-item>
     <!-- 首页-鞋靴箱包 -->
     <swiper-item swiperIndex='3'>
       <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollBootFn'>
-        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}" page="{{page}}"/>
+        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}"
+          page="{{page}}" />
       </scroll-view>
     </swiper-item>
     <!-- 首页-手机数码 -->
     <swiper-item swiperIndex='4'>
       <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollPhoneFn'>
-        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}" page="{{page}}"/>
+        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}"
+          page="{{page}}" />
       </scroll-view>
     </swiper-item>
     <!-- 首页-电脑办公 -->
     <swiper-item swiperIndex='5'>
       <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollComputerFn'>
-        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}" page="{{page}}"/>
+        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}"
+          page="{{page}}" />
       </scroll-view>
     </swiper-item>
     <!-- 首页-家居家纺 -->
     <swiper-item swiperIndex='6'>
       <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollHouseholdFn'>
-        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}" page="{{page}}"/>
+        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}"
+          page="{{page}}" />
       </scroll-view>
     </swiper-item>
     <!-- 首页-个人化妆 -->
     <swiper-item swiperIndex='7'>
       <scroll-view scroll-y="true" style="height:{{mainHeight}}px" bindscrolltolower='scrollPersonalFn'>
-        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}" page="{{page}}"/>
+        <homeEle kitchenData='{{kitchenData}}' productDatas="{{productDatas}}" mainHeight="{{mainHeight}}"
+          page="{{page}}" />
       </scroll-view>
     </swiper-item>
 
