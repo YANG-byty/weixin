@@ -1,18 +1,21 @@
 /**index.wxss**/
 @import "../template/template.wxss";
-.home-header{
-  width:100%;
+
+.home-header {
+  width: 100%;
   height: 100rpx;
   background-color: #F34646;
   position: fixed;
   z-index: 99;
   top: 0;
 }
-.headerActive{
+
+.headerActive {
   background-color: #4091FF;
-  
+
 }
-.home-header .input-warp{
+
+.home-header .input-warp {
   width: calc(100% - 60rpx);
   height: 100%;
   margin: 0 30rpx;
@@ -20,84 +23,93 @@
   align-items: center;
   justify-content: space-between;
 }
-.home-header .input-warp input{
+
+.home-header .input-warp input {
   background-color: white;
   width: 85%;
   height: 65rpx;
-  border-radius:50rpx;
+  border-radius: 50rpx;
   font-size: 30rpx;
   padding-left: 20rpx;
 }
-.home-header .input-warp image{
+
+.home-header .input-warp image {
   width: 40rpx;
-  height:40rpx;
+  height: 40rpx;
 }
-.container{
+
+.container {
   margin: 0 auto;
   padding: 0;
   width: calc(100% - 40rpx);
 }
 
-.nav{
+.nav {
   width: 100%;
   background-color: #F34646;
   color: #fff;
 }
 
-.nav .nav-category{
-   width: 20%;
-   text-align: center;
-   height: 80rpx;
-   line-height:  80rpx;
-   box-shadow: -6px 0 4px -4px rgba(0, 0, 0, 0.4);
+.nav .nav-category {
+  width: 20%;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  box-shadow: -6px 0 4px -4px rgba(0, 0, 0, 0.4);
 }
-.nav-category text{
+
+.nav-category text {
   margin-left: 10rpx;
 }
-.nav .navHeader{
+
+.nav .navHeader {
   width: 80%;
 }
-.nav .nav-banner{
+
+.nav .nav-banner {
   position: fixed;
   z-index: 99;
   display: flex;
   width: 100%;
-  top:50px;
+  top: 50px;
 }
-.navHeader .navText{
+
+.navHeader .navText {
   width: 100%;
   line-height: 80rpx;
   white-space: nowrap;
   height: 80rpx;
 }
-.navHeader .navText .content-text{
+
+.navHeader .navText .content-text {
   transition: all 0.5s linear;
   width: 100%;
   line-height: 80rpx;
   white-space: nowrap;
   height: 80rpx;
 }
-.navHeader .navText  view{
+
+.navHeader .navText view {
   display: inline-block;
   /* width: 25%; */
   padding: 0 10px;
   text-align: center;
 }
 
-.navHeader .active{
+.navHeader .active {
   font-weight: bold;
 }
 
-.main{
- margin-top: 100rpx;
- position: relative;
- top: 81rpx;
- bottom: 0;
+.main {
+  margin-top: 100rpx;
+  position: relative;
+  top: 81rpx;
+  bottom: 0;
 }
 
-.main .nav_bg{
+.main .nav_bg {
   width: 100%;
-  height:70px;
+  height: 70px;
   position: fixed;
   top: 50.5px;
   border-radius: 15px;

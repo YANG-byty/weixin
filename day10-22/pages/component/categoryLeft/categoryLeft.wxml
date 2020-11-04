@@ -1,0 +1,40 @@
+<!-- 分类左边部分 -->
+<view class="categoryLeft">
+  <scroll-view scroll-y='true'>
+    <ul>
+      <li bindtap="categoryLeFn" data-index="{{index}}" data-cat_id="{{item.cat_id}}" wx:for="{{categoryLeftDatas}}"
+        wx:key="index">
+        <p class="{{leftIndex==index?'active':''}}">{{item.cat_name}}</p>
+      </li>
+    </ul>
+  </scroll-view>
+</view>
+
+<!-- 分类页面的右边部分 -->
+<view class="categoryRight">
+  <swiper vertical='true'>
+    <swiper-item>
+      <scroll-view scroll-y='true' style="height:100%;" scroll-top="{{scrollTop}}" bindscroll="dragstartTop"
+        bindscrolltoupper="scrollTopFn" bindscrolltolower="scrollBottomFn">
+        <view class="imgTop">
+          <image src="{{touch_catads}}" alt="" />
+        </view>
+        <view class="main" wx:for="{{rightList}}" wx:key='index'>
+          <view class="content">
+            <view class="title">{{item.cat_name}}</view>
+            <view class="contentImg">
+              <ul>
+                <li wx:for="{{item.child}}" wx:key='index' bindtap="toProductList" data-cat_id='{{item.cat_id}}'
+                  data-title='{{item.cat_name}}'>
+                  <a href>
+                    <image src="{{item.touch_icon}}" alt="" /></a>
+                  <view>{{item.cat_name}}</view>
+                </li>
+              </ul>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

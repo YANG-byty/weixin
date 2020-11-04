@@ -2,6 +2,12 @@
 <view class="home">
   <scroll-view scroll-y="true" style="height:700px" bindscroll="homeScrollFn">
     <homeSearch opacity="{{opacity}}" color="{{color}}"></homeSearch>
+    <!-- 关注 -->
+    <view class="attention">
+      <view class="arrows"></view>
+      <view class="text">点击"···"关注正弘城+，可以快速打开小程序</view>
+      <view class="iconfont icon-guanbi"></view>
+    </view>
     <homeSwiper></homeSwiper>
     <view class="home-area">
       <goodsList goodsList="{{goodsList}}"></goodsList>

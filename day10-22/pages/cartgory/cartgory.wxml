@@ -1,2 +1,4 @@
-<!--pages/cartgory/cartgory.wxml-->
-<text>pages/cartgory/cartgory.wxml</text>
+<view class="category">
+  <categoryHeader category="{{category}}" flag="{{flag}}"></categoryHeader>
+  <categoryLeft></categoryLeft>
+</view>

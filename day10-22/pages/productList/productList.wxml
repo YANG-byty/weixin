@@ -1,0 +1,43 @@
+<view class="product-list">
+  <searchHeader category="{{category}}" />
+  <view class="product-filter">
+    <ul>
+      <li class="{{filterindex==index?'active':''}}" wx:for="{{filter}}" wx:key="index" data-filterIndex="{{index}}"
+        catchtap="filterFn">{{item}}
+        <!-- <view wx:if="{{index==0 }}">
+          <icon class="iconfont icon-f11-copy1-copy" wx:if="{{flag}}"></icon>
+          <icon class="iconfont icon-shangjiantou" wx:else></icon>
+        </view>
+        <view wx:if="{{index==3}}">
+          <icon class="iconfont icon-f11-copy1-copy" wx:if="{{flag}}"></icon>
+          <icon class="iconfont icon-shangjiantou" wx:else></icon>
+        </view> -->
+      </li>
+    </ul>
+  </view>
+  <view class="goodListDatas">
+    <ul>
+      <li wx:for="{{productDatas}}" wx:key="index">
+        <navigator url="../detail/detail?goods_id={{item.goods_id}}">
+          <view class="pro-img">
+            <image src="{{item.goods_img}}" alt=""></image>
+          </view>
+          <view class="pro-details">
+            {{ item.goods_name }}
+          </view>
+          <view class="pro-price">
+            <em>￥</em>
+            <span>{{ item.shop_price }}</span>
+          </view>
+          <view class="outer">
+            <view>
+              <span class="text">进店</span>
+              <span class="text2">{{ item.sales_volume }}人已选购</span>
+            </view>
+            <view><i class="iconfont icon-gouwuche"></i></view>
+          </view>
+        </navigator>
+      </li>
+    </ul>
+  </view>
+</view>

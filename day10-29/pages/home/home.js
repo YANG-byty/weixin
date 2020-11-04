@@ -18,7 +18,7 @@ Page({
 
   // 滚动home内容部分触发
   homeScrollFn(e) {
-    console.log(this.data.opacity);
+    // console.log(this.data.opacity);
     this.setData({
       opacity: e.detail.scrollTop / 60 * 0.6
     })
@@ -54,7 +54,7 @@ Page({
       size: 10,
       type: 'is_best'
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       if (res.statusCode == 200) {
         wx.hideLoading();
         //瀑布流
@@ -70,7 +70,7 @@ Page({
         this.setData({
           goodsList: this.data.goodsList
         })
-        console.log(this.data.goodsList);
+        // console.log(this.data.goodsList);
       }
     });
   },

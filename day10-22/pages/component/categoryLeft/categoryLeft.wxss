@@ -1,0 +1,95 @@
+.categoryLeft {
+  width: 168rpx;
+  height: 100%;
+  border-right: 1px solid #efefef;
+  margin: 0 0 100rpx;
+  float: left;
+}
+
+.categoryLeft::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryLeft ul li {
+  width: 168rpx;
+  height: 76rpx;
+  text-align: center;
+  line-height: 76rpx;
+  color: #999;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+
+.categoryLeft ul li p {
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-left: 3px solid #fff;
+}
+
+.categoryLeft ul li .active {
+  border-left: 6rpx solid #f55;
+  color: #f55;
+}
+
+
+/* 右边部分 */
+.categoryRight {
+  height: 100%;
+  float: left;
+  width: calc(100% - 170rpx);
+}
+
+.categoryRight swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.categoryRight .imgTop {
+  padding: 22rpx 22rpx 0;
+}
+
+.categoryRight .imgTop image {
+  width: 536rpx;
+  height: 192rpx;
+}
+
+
+.categoryRight .main .content {
+  width: calc(100% - 40rpx);
+  margin: 0 20rpx;
+}
+
+.categoryRight .main .content .title {
+  width: 100%;
+  height: 94rpx;
+  line-height: 94rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.categoryRight .main .content .contentImg ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.categoryRight .main .content .contentImg ul li {
+  width: 180rpx;
+  height: 164rpx;
+  text-align: center;
+  margin-bottom: 40rpx;
+  font-size: 24rpx;
+}
+
+.categoryRight .main .content .contentImg ul li image {
+  width: 104rpx;
+  height: 104rpx;
+}
+
+.categoryRight .main .content .contentImg ul li view {
+  display: block;
+  margin-top: 20rpx;
+  color: #999;
+}

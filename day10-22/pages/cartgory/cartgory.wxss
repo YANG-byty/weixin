@@ -1,1 +1,7 @@
-/* pages/cartgory/cartgory.wxss */
+.category {
+  position: absolute;
+  top: 100rpx;
+  bottom: 0;
+  width: 100%;
+  overflow-y: hidden;
+}

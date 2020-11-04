@@ -1,0 +1,18 @@
+<view class="categoryHeader">
+  <view class="ch-left" wx:if="{{flag}}">
+    <i class="iconfont icon-right-angle"></i>
+  </view>
+  <view class="ch-left" style="width:5%" wx:else>
+  </view>
+  <view class="ch-rigth">
+    <form action>
+      <input type="text" wx:if="{{flag}}" placeholder="输入搜索关键字" />
+      <input type="text" wx:else placeholder="输入搜索关键字" />
+      <i class="iconfont icon-sousuo"></i>
+    </form>
+  </view>
+  <view class="ch-category" wx:if="{{category}}">
+    <i wx:if="{{categoryIcon}}" class="iconfont icon-pailie"></i>
+    <i wx:else class="iconfont icon-pailie1"></i>
+  </view>
+</view>

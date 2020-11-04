@@ -30,7 +30,7 @@
    color: #fff;
  }
 
- .home-search .search-input input[type=text]::-webkit-input-placeholder {
+ .home-search .search-input .phcolor {
    color: #fff;
  }
 

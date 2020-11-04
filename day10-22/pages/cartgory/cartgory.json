@@ -1,7 +1,10 @@
 {
-  "backgroundTextStyle":"light",
+  "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTitleText": "分类",
-  "navigationBarTextStyle":"black",
-  "usingComponents": {}
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "categoryHeader": "../component/searchHeader/searchHeader",
+    "categoryLeft": "../component/categoryLeft/categoryLeft"
+  }
 }

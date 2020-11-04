@@ -6,7 +6,7 @@ Page({
   data: {
     bgColor: ['#E43124', '#F34646', '#3C81FF', '#028379', '#4091FF'],
     cat_id: ['', '858', '6', '8', '3', '4', '5', '860'],
-    flag:true,  //首页轮播图开关
+    flag: true,  //首页轮播图开关
     navDatas: [{
       title: '首页'
     }, {
@@ -24,21 +24,21 @@ Page({
     }, {
       title: '个人化妆'
     }],
-    swiperLists:[], //首页轮播图数据
+    swiperLists: [], //首页轮播图数据
     homeIndex: 0, //首页-首页轮播图索引
     swiperIndex: 0, //nav索引
     oLeft: 0,  //首页头部导航栏移动
-    opacity:{},
-    mainHeight: 0,  
-    goodsList:[],//首页-首页列表数据
+    opacity: {},
+    mainHeight: 0,
+    goodsList: [],//首页-首页列表数据
     kitchenData: [],//厨房电器数据
     productDatas: [],//家用电器页面的品牌精选数据
     page: 1,
-    swiperSlideLists:[],//首页潮流服饰数据
-    hotDatas:[],  //首页商城热点
-    seckillDatas:{},  //限时秒杀
-    odd:[],
-    even:[],
+    swiperSlideLists: [],//首页潮流服饰数据
+    hotDatas: [],  //首页商城热点
+    seckillDatas: {},  //限时秒杀
+    odd: [],
+    even: [],
   },
   //事件处理函数
   bindViewTap: function () {
@@ -64,13 +64,13 @@ Page({
     // https://x.dscmall.cn/api/visual/visual_second_category?cat_id=858
     // https://x.dscmall.cn/api/catalog/goodslist
     //改变nav中的索引使其移动
-    if(e.currentTarget.dataset.current==0){
+    if (e.currentTarget.dataset.current == 0) {
       this.setData({
-        flag:true
+        flag: true
       })
-    }else{
+    } else {
       this.setData({
-        flag:false
+        flag: false
       })
     }
     this.setData({
@@ -93,80 +93,57 @@ Page({
     this.postListDatas();
   },
   //首页-首页
-  scrollIndexFn(){
-    var page=++this.data.page;
-    
+  scrollIndexFn() {
+    var page = ++this.data.page;
+
     wx.showLoading({
       title: '数据加载中...',
     })
     // https://x.dscmall.cn/api/goods/type_list?page=1&size=10&type=is_best
     wx.request({
       url: 'https://x.dscmall.cn/api/goods/type_list',
-      data:{
-        page:page,
-        size:10,
-        type:'is_best'
+      data: {
+        page: page,
+        size: 10,
+        type: 'is_best'
       },
-      success:(res)=>{
+      success: (res) => {
         // console.log(res);
-        if(res.statusCode==200){
-          if(res.data.data.length==0){
+        if (res.statusCode == 200) {
+          if (res.data.data.length == 0) {
             wx.showToast({
               title: '没有更多商品了！',
             })
-          }else{
+          } else {
             //瀑布流
-          for (let i = 0; i < res.data.data.length; i++) {
-            if((i+1)%2==0){
-              this.data.goodsList[0].push(res.data.data[i]);
-            }else{
-              this.data.goodsList[1].push(res.data.data[i]);
+            for (let i = 0; i < res.data.data.length; i++) {
+              if ((i + 1) % 2 == 0) {
+                this.data.goodsList[0].push(res.data.data[i]);
+              } else {
+                this.data.goodsList[1].push(res.data.data[i]);
+              }
             }
-          }
             wx.hideLoading();
             this.setData({
-              goodsList:this.data.goodsList
+              goodsList: this.data.goodsList
             })
           }
         }
       }
     })
   },
-   //首页-家用电器
+  //首页-家用电器
   scrollEleFn() {
     this.getListDatas();
   },
-    //首页-男装女装
-  scrollMakeFn() {
-    this.getListDatas();
-  },
-    //首页-鞋靴箱包
-  scrollBootFn(){
-    this.getListDatas();
-  },
-    //首页-手机数码
-  scrollPhoneFn(){
-    this.getListDatas();
-  },
-    //首页-电脑办公
-  scrollComputerFn(){
-    this.getListDatas();
-  },
-    //首页-家居家纺
-  scrollHouseholdFn(){
-    this.getListDatas();
-  },
-    //首页-个人化妆
-  scrollPersonalFn(){
-    this.getListDatas();
-  },
-// get请求首页数据
-getHomeDatas(){
+
+  // get请求首页数据
+  getHomeDatas() {
     var cat_id = this.data.cat_id[this.data.swiperIndex];
     wx.request({
       url: `https://x.dscmall.cn/api/visual/visual_second_category`,
-      data:{
-        cat_id:cat_id,
+      data: {
+        cat_id: cat_id,
       },
       success: (res) => {
         this.setData({
@@ -174,45 +151,45 @@ getHomeDatas(){
         })
       }
     })
-},
-// 初始化数据
-postListDatas(){
-  wx.showLoading({
-    title: '正在加载中...',
-  })
-  var cat_id = this.data.cat_id[this.data.swiperIndex];
-  var productDatas = this.data.productDatas;
-  wx.request({
-    url: `https://x.dscmall.cn/api/catalog/goodslist`,
-    method: "POST",
-    data: {
-      cat_id: cat_id,
-      page:1,
-      size: 10,
-    },
-    header: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    success: (res) => {
-      if (res.statusCode == 200) {
-        if (res.data.data.length == 0) {
-          wx.showToast({
-            title: '没有更多数据了',
-          })
-        } else {
-          wx.hideLoading();
-          this.setData({
-            productDatas: res.data.data
-          })
+  },
+  // 初始化数据
+  postListDatas() {
+    wx.showLoading({
+      title: '正在加载中...',
+    })
+    var cat_id = this.data.cat_id[this.data.swiperIndex];
+    var productDatas = this.data.productDatas;
+    wx.request({
+      url: `https://x.dscmall.cn/api/catalog/goodslist`,
+      method: "POST",
+      data: {
+        cat_id: cat_id,
+        page: 1,
+        size: 10,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: (res) => {
+        if (res.statusCode == 200) {
+          if (res.data.data.length == 0) {
+            wx.showToast({
+              title: '没有更多数据了',
+            })
+          } else {
+            wx.hideLoading();
+            this.setData({
+              productDatas: res.data.data
+            })
+          }
         }
+      },
+      fail: (resle) => {
+        console.log(resle);
       }
-    },
-    fail: (resle) => {
-      console.log(resle);
-    }
-  })
-},
-//post请求首页数据
+    })
+  },
+  //post请求首页数据
   getListDatas() {
     wx.showLoading({
       title: '正在加载中...',
@@ -225,7 +202,7 @@ postListDatas(){
       method: "POST",
       data: {
         cat_id: cat_id,
-        page:page,
+        page: page,
         size: 10,
       },
       header: {
@@ -252,26 +229,26 @@ postListDatas(){
   },
 
   //顶部动画
-  scrollTopFn(e){
+  scrollTopFn(e) {
     // console.log(e.detail.scrollTop);
-    var scrollTop=e.detail.scrollTop;
-    if(scrollTop>40){
-      var obj={
-        opacity:'opacity:0;',
-        transition:'transition:all 1s;'
+    var scrollTop = e.detail.scrollTop;
+    if (scrollTop > 40) {
+      var obj = {
+        opacity: 'opacity:0;',
+        transition: 'transition:all 1s;'
       }
       this.setData({
-        opacity:obj
+        opacity: obj
       })
-    }else{
+    } else {
       this.setData({
-        opacity:1
+        opacity: 1
       })
     }
   },
 
   onLoad: function (options) {
-    
+
     wx.showLoading({
       title: '数据加载中...',
     })
@@ -279,27 +256,27 @@ postListDatas(){
     // https://x.dscmall.cn/api/goods/type_list?page=1&size=10&type=is_best
     wx.request({
       url: 'https://x.dscmall.cn/api/goods/type_list',
-      data:{
-        page:1,
-        size:10,
-        type:'is_best'
+      data: {
+        page: 1,
+        size: 10,
+        type: 'is_best'
       },
-      success:(res)=>{
+      success: (res) => {
         // console.log(res.data);
-        if(res.statusCode==200){
+        if (res.statusCode == 200) {
           wx.hideLoading();
           //瀑布流
           for (let i = 0; i < res.data.data.length; i++) {
-            if((i+1)%2==0){
+            if ((i + 1) % 2 == 0) {
               this.data.even.push(res.data.data[i]);
-            }else{
+            } else {
               this.data.odd.push(res.data.data[i]);
             }
           }
           this.data.goodsList.push(this.data.even);
           this.data.goodsList.push(this.data.odd);
           this.setData({
-            goodsList:this.data.goodsList
+            goodsList: this.data.goodsList
           })
         }
       }
@@ -307,29 +284,29 @@ postListDatas(){
     // 首页轮播图下面潮流服饰数据
     wx.request({
       url: 'https://x.dscmall.cn/api/visual/view',
-      method:'post',
-      header:"content-type:application/x-www-form-urlencoded",
-      data:{
+      method: 'post',
+      header: "content-type:application/x-www-form-urlencoded",
+      data: {
         id: 3,
         type: 'index',
         device: 'h5'
       },
-      success:(res)=>{
-       
-        var datas=JSON.parse(res.data.data.data)
+      success: (res) => {
+
+        var datas = JSON.parse(res.data.data.data)
         // console.log(datas)
         this.setData({
-          swiperLists:datas[2].data.list
+          swiperLists: datas[2].data.list
         })
-        var arr=[];
-        var arrNum=10;
-        for(var i=0;i<datas[3].data.list.length;i+=arrNum){
-          arr.push(datas[3].data.list.slice(i,i+arrNum));
+        var arr = [];
+        var arrNum = 10;
+        for (var i = 0; i < datas[3].data.list.length; i += arrNum) {
+          arr.push(datas[3].data.list.slice(i, i + arrNum));
         }
         // console.log(arr);
         this.data.swiperSlideLists.push(arr);
         this.setData({
-          swiperSlideLists:this.data.swiperSlideLists[0]
+          swiperSlideLists: this.data.swiperSlideLists[0]
         })
       }
     })
@@ -337,30 +314,30 @@ postListDatas(){
     // 首页商城热点数据
     wx.request({
       url: 'https://x.dscmall.cn/api/visual/article',
-      method:'post',
-      header:'content-type:application/x-www-form-urlencoded',
-      data:{
+      method: 'post',
+      header: 'content-type:application/x-www-form-urlencoded',
+      data: {
         cat_id: 20,
         num: 10
       },
-      success:(res)=>{
+      success: (res) => {
         // console.log(res.data.data);
         this.setData({
-          hotDatas:res.data.data
+          hotDatas: res.data.data
         })
       }
     })
     // 限时秒杀
     wx.request({
-      url:"https://x.dscmall.cn/api/visual/visual_seckill",
-      data:{
+      url: "https://x.dscmall.cn/api/visual/visual_seckill",
+      data: {
         id: 27,
         tomorrow: 0
       },
-      success:(res)=>{
+      success: (res) => {
         // console.log(res);
         this.setData({
-          seckillDatas:res.data.data
+          seckillDatas: res.data.data
         })
       }
     })
@@ -410,8 +387,8 @@ postListDatas(){
       hasUserInfo: true
     })
   },
-  onUnload:function(){
-   
+  onUnload: function () {
+
   }
 
 })

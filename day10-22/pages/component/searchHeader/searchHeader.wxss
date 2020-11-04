@@ -1,0 +1,59 @@
+@import "/assets/iconfont/iconfont.wxss";
+
+.categoryHeader {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid #efefef;
+  background: white;
+  z-index: 99;
+}
+
+.categoryHeader .ch-left {
+  width: 10%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+}
+
+.categoryHeader .ch-left i {
+  font-size: 18px;
+}
+
+
+.categoryHeader .ch-rigth {
+  width: 85%;
+  text-align: center;
+  height: 88rpx;
+  position: relative;
+  margin-top: 20rpx;
+}
+
+.categoryHeader .ch-rigth form input {
+  border: 1px solid #ccc;
+  border-radius: 30rpx;
+  height: 60rpx;
+  width: 100%;
+  text-indent: 20rpx;
+}
+
+.categoryHeader .ch-rigth form i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 88rpx;
+  height: 88rpx;
+  line-height: 60rpx;
+  color: #ccc;
+}
+
+.categoryHeader .ch-category {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

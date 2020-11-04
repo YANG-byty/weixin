@@ -2,7 +2,7 @@
 <view class="home-search" style="background-color: rgba(255, 255, 255, {{opacity}});">
   <view class="search-input">
     <view class="iconfont icon-sousuo"></view>
-    <input type="text" placeholder="输入关键词" />
+    <input type="text" placeholder-class="phcolor" placeholder="输入关键词" />
   </view>
   <view class="home-title" style="color: {{color}};">正弘城+</view>
 </view>

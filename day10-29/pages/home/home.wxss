@@ -1,4 +1,39 @@
 /* pages/home/home.wxss */
+@import "/assets/iconfont/iconfont.wxss";
+
 .home {
   background-color: #efefef;
+}
+
+.home .attention {
+  position: fixed;
+  top: 201rpx;
+  right: 43rpx;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, .7);
+  width: 330rpx;
+  height: 80rpx;
+  display: flex;
+  border-radius: 20rpx;
+  padding: 20rpx;
+
+}
+
+.home .attention .text {
+  font-size: 26rpx;
+}
+
+.home .attention .iconfont {
+  color: #b1a9a9;
+}
+
+.home .attention .arrows {
+  position: absolute;
+  top: -11px;
+  right: 46px;
+  width: 0;
+  height: 0;
+  border-left: 20rpx solid transparent;
+  border-right: 20rpx solid transparent;
+  border-bottom: 25rpx solid rgba(255, 255, 255, .7);
 }
