@@ -5,13 +5,145 @@ Page({
    * 页面的初始数据
    */
   data: {
+    cart: [],
+    totalPrice: 0,
+    buyNum: 0,
+    checkAlldate: true,
+  },
 
+  // 加加
+  addFn(e) {
+    var cart = this.data.cart;
+    var index = e.currentTarget.dataset.index;
+    var cartData = cart[index].num;
+    cart[index].num = cartData + 1;
+    this.setData({
+      cart: cart
+    })
+    this.totalPrice();
+  },
+
+  // 减减
+  refuceFn(e) {
+    var cart = this.data.cart;
+    var index = e.currentTarget.dataset.index;
+    var cartData = cart[index].num;
+    if (cartData > 1) {
+      cart[index].num = cartData - 1;
+    }
+    this.setData({
+      cart: cart
+    })
+    this.totalPrice();
+  },
+
+  // 单个选中
+  checkedFn(e) {
+    var index = e.currentTarget.dataset.index;
+    var cart = this.data.cart;
+    cart[index].isSelect = !cart[index].isSelect;
+    this.totalPrice();
+    this.setData({
+      cart: wx.getStorageSync('cartData')
+    })
+    this.checkAll();
+  },
+
+  // 全选按钮
+  checkAllFn() {
+
+    this.setData({
+      cart: wx.getStorageSync('cartData')
+    })
+    this.setData({
+      checkAlldate: !this.data.checkAlldate
+    })
+    var cart = this.data.cart;
+    for (var i = 0; i < cart.length; i++) {
+      cart[i].isSelect = this.data.checkAlldate;
+    }
+    this.setData({
+      cart: cart
+    })
+    this.totalPrice();
+  },
+
+  checkAll() {
+    this.setData({
+      cart: wx.getStorageSync('cartData')
+    })
+    var cart = this.data.cart;
+    var arr = [];
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].isSelect) {
+        arr.push(cart[i].isSelect);
+      }
+    }
+    if (arr.length == cart.length) {
+      this.setData({
+        checkAlldate: true
+      })
+    } else {
+      this.setData({
+        checkAlldate: false
+      })
+    }
+  },
+
+  // 计算总价
+  totalPrice() {
+    var cart = this.data.cart;
+    wx.setStorageSync('cartData', cart)
+    var totalPrice = 0;
+    var buyNum = 0;
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].isSelect) {
+        totalPrice += cart[i].num * cart[i].shop_price
+        buyNum += cart[i].num;
+      }
+    }
+    this.setData({
+      totalPrice: totalPrice,
+      buyNum: buyNum
+    })
+  },
+
+  removeFn(e) {
+    var index = e.currentTarget.dataset.index;
+    var cart = this.data.cart;
+    wx.showModal({
+      title: '提示',
+      content: '亲，您确定要放弃该商品吗？',
+      success(res) {
+        if (res.confirm) {
+          cart.splice(index, 1);
+          this.setData({
+            cart: cart
+          })
+          wx.setStorageSync('cartData', cart)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  toDetailFn(e) {
+    console.log(e.currentTarget.dataset.gid);
+    wx.navigateTo({
+      url: '../detail/detail?goods_id=' + e.currentTarget.dataset.gid,
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      cart: wx.getStorageSync('cartData')
+    })
+
+    this.totalPrice();
+    this.checkAll();
 
   },
 

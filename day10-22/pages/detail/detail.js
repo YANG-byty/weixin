@@ -1,4 +1,8 @@
-let { requestApi } = require('../../utils/request');
+let {
+  requestApi
+} = require('../../utils/request');
+let app = getApp();
+let wxParse = require('../../wxParse/wxParse');
 Page({
 
   /**
@@ -9,8 +13,122 @@ Page({
     headerIndex: 0,
     detailDatas: {},
     strDatas: '',
-    flag: true
+    flag: true,
+    page: 1,
+    goodsList: [],
+    windowHeight: 0,
+    listflag: true,
+    topArr: [],
+    heightArr: [],
+    mask: false,
+    animationObj: '',
+    num: 1,
+    gid: 0
   },
+
+  // 减减   加加
+  changeNumFn(e) {
+    console.log(e.currentTarget.dataset.num);
+    if (e.currentTarget.dataset.num == 0) {
+      if (this.data.num <= 1) {
+        this.setData({
+          num: 1
+        })
+        wx.showToast({
+          title: '至少要买一件呦！',
+          icon: 'error',
+        })
+      } else {
+        this.setData({
+          num: this.data.num - 1
+        })
+      }
+    } else {
+      this.setData({
+        num: this.data.num + 1
+      })
+    }
+
+  },
+
+  toDetailFn() {
+    wx.switchTab({
+      url: '../cart/cart',
+    })
+  },
+
+  // 加入购物车
+  addCartFn() {
+    var cartData = this.data.detailDatas;
+    cartData.isSelect = true;
+    cartData.num = this.data.num;
+    var gid = this.data.gid;
+    var cartDatas = wx.getStorageSync('cartData') || [];
+    console.log(cartDatas);
+
+    if (cartDatas.length > 0) {
+      for (var i = 0; i < cartDatas.length; i++) {
+        if (cartDatas[i].goods_id == gid) {
+          console.log(gid);
+          cartDatas[i].num = cartDatas[i].num + 1;
+          try {
+            wx.setStorageSync('cartData', cartDatas);
+            wx.showToast({
+              title: '添加成功！',
+              icon: 'success',
+              duration: 2000
+            })
+          } catch (err) {
+            wx.showToast({
+              title: '添加失败！',
+              icon: 'error',
+            })
+          }
+          return;
+        }
+      }
+      cartDatas.unshift(cartData);
+    } else {
+      cartDatas.unshift(cartData);
+      console.log(cartDatas);
+      wx.showToast({
+        title: '添加成功！',
+        icon: 'success',
+        duration: 2000
+      })
+    }
+    wx.setStorageSync('cartData', cartDatas);
+
+  },
+
+  animationFn() {
+    var animation = wx.createAnimation({
+      duration: 300,
+      timingFunction: 'linear'
+    })
+    animation.translateY(260).step();
+    setTimeout(() => {
+      animation.translateY(0).step();
+      this.setData({
+        animationObj: animation.export(), //导出动画
+        mask: true
+      })
+    }, 200);
+    this.setData({
+      animationObj: animation.export(),
+      mask: true
+    })
+  },
+  // 点击已选动画
+  showMaskFn() {
+    this.animationFn();
+  },
+  hiddenMaskFn() {
+    this.setData({
+      mask: false
+    })
+  },
+
   // 详情页头部导航切换
   activeChange(e) {
     this.setData({
@@ -30,36 +148,127 @@ Page({
       flag: false
     })
   },
+  // 封装一个获取top  height的函数
+  infoScrollFn() {
+    var topArr = [];
+    var heightArr = [];
+    for (var i = 0; i < 3; i++) {
+      const query = wx.createSelectorQuery();
+      query.select('#detail' + i).boundingClientRect();
+      query.selectViewport().scrollOffset();
+      query.exec((res) => {
+        // #the-id节点的上边界坐标
+        // 显示区域的竖直滚动位置
+        console.log(res[0]);
+        topArr.push(res[0].top);
+        heightArr.push(res[0].height);
+      })
+    }
+    this.setData({
+      topArr: topArr,
+      heightArr: heightArr
+    })
+  },
+
+  scrollContentFn(e) {
+    // this.infoScrollFn();
+    var scrollTop = e.detail.scrollTop;
+    // console.log(scrollTop);
+    var detailHeader = 0;
+    // 获取头部nav的高度
+    const query = wx.createSelectorQuery();
+    query.select('#detail-header').boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec((res) => {
+      // #the-id节点的上边界坐标
+      // 显示区域的竖直滚动位置
+      detailHeader = res[0].height;
+      // console.log(detailHeader);
+    })
+    // console.log(this.data.topArr);
+
+    for (var i = 0; i < this.data.topArr.length; i++) {
+      // console.log(this.data.topArr[i] - detailHeader + this.data.heightArr[i]);
+      if (scrollTop > this.data.topArr[i] && scrollTop < this.data.topArr[i] - detailHeader + this.data.heightArr[i]) {
+        this.setData({
+          headerIndex: i
+        })
+      }
+    }
+  },
 
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   async detailFn(url, data, method) {
     let detailDatas = await requestApi(url, data, method);
-    console.log(detailDatas);
+    // console.log(detailDatas);
     var str = detailDatas.data.data.goods_desc;
-    // var aa = str.replace(new RegExp('div', 'mg'), 'view').replace(new RegExp('img', 'mg'), 'image');
-    // var aa = str.replace(/div/mg, 'view');
-
-    // console.log(str);
     this.setData({
       detailDatas: detailDatas.data.data,
       strDatas: str
     })
+    wxParse.wxParse('article', 'html', this.data.strDatas, this);
+  },
 
+  // https://x.dscmall.cn/api/goods/goodsguess
+  async scrollFn(page) {
+    wx.showLoading({
+      title: '加载中...',
+    })
+    var url = 'https://x.dscmall.cn/api/goods/goodsguess';
+    let result = await requestApi(url, {
+      page: page,
+      size: 10
+    }, 'post');
+    // console.log(result);
+    if (result.statusCode == 200) {
+      wx.hideLoading()
+    }
+    if (result.data.data == '') {
+      this.setData({
+        listflag: false
+      })
+    }
+    if (page == 1) {
+      this.setData({
+        goodsList: result.data.data
+      })
+    } else {
+      this.setData({
+        goodsList: this.data.goodsList.concat(result.data.data)
+      })
+    }
+  },
 
+  // 详情页列表数据
+  detailScrollFn() {
+    if (this.data.listflag) {
+      var page = ++this.data.page;
+      this.scrollFn(page);
+    }
   },
 
   onLoad: function (options) {
+    this.setData({
+      windowHeight: app.globalData.windowHeight,
+      gid: options.goods_id
+    })
     // console.log(options);
     // https://x.dscmall.cn/api/goods/show
     var url = 'https://x.dscmall.cn/api/goods/show';
     this.detailFn(url, {
       goods_id: options.goods_id
     }, 'post');
-  },
 
+    this.scrollFn(this.data.page);
+    wx.showLoading({
+      title: '加载中...',
+    })
+    setTimeout(() => {
+      this.infoScrollFn();
+      wx.hideLoading()
+    }, 5000)
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

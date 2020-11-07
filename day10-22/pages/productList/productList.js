@@ -1,57 +1,110 @@
 // pages/faxian/faxian.js
-var { requestApi } = require('../../utils/request');
+var {
+  requestApi
+} = require('../../utils/request');
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // flag: true,
     filterindex: 0,
     filter: ['综合', '新品', '销量', '价格', '筛选'],
     category: true,
     productDatas: [],
     sort: ['goods_id', 'last_update', 'sales_volume', 'shop_price'],
     order: ['desc', 'asc'],
-    cat_id:0,
+    cat_id: 0,
+    windowHeight: 0,
+    page: 1,
+    flag: false,
+    num: 0,
+    scrollFlag: true,
   },
 
-  async goodsDatas(cat_id, sort, max, min) {
+  async goodsDatas(cat_id, sort, order, page, max, min) {
+    wx.showLoading({
+      title: '加载中...',
+    })
     let result = await requestApi('https://x.dscmall.cn/api/catalog/goodslist', {
       cat_id: cat_id,
       warehouse_id: 0,
       area_id: 0,
       goods_num: 0,
       size: 10,
-      page: 1,
+      page: page,
       sort: sort,
-      order: 'desc',
+      order: order,
       self: 0,
     }, 'post')
-    console.log(result);
-    this.setData({
-      productDatas: result.data.data
-    })
-  },
-  filterFn(e) {
+    if (this.data.flag) {
+      this.setData({
+        productDatas: this.data.productDatas.concat(result.data.data),
+        scrollFlag: false
+      }, () => {
+        wx.hideLoading()
+      })
+    } else {
+      this.setData({
+        productDatas: result.data.data
+      }, () => {
+        wx.hideLoading();
+        this.setData({
+          scrollFlag: true
+        })
+      })
+    }
+    console.log(this.data.page);
 
-    // console.log(e.target.dataset.filterindex);
-    // if (this.data.filter[e.target.dataset.filterindex] == '综合') {
-    //   this.setData({
-    //     flag: !flag
-    //   })
-    // }
+    console.log(result.data.data);
+
+  },
+
+  // 点击头部赛选
+  filterFn(e) {
+    if (e.target.dataset.filterindex == 3) {
+      if (this.data.num == 0) {
+        this.setData({
+          num: 1,
+        })
+      } else {
+        this.setData({
+          num: 0,
+        })
+      }
+    }
     this.setData({
-      filterindex: e.target.dataset.filterindex
+      filterindex: e.target.dataset.filterindex,
+      flag: false
     })
     var sort = this.data.sort[e.target.dataset.filterindex];
-    this.goodsDatas(this.data.cat_id,sort,);
+    var order = this.data.order[this.data.num]
+    this.goodsDatas(this.data.cat_id, sort, order);
   },
+
+  // 滚动到底部
+  scrollTolowerFn() {
+    if (this.data.scrollFlag) {
+      this.setData({
+        page: ++this.data.page,
+        flag: true
+      })
+      var page = this.data.page;
+      var sort = this.data.sort[this.datafilterindex];
+      var order = this.data.order[this.data.num]
+      this.goodsDatas(this.data.cat_id, sort, order, page);
+    }
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-    // console.log(option.cat_id);
+    this.setData({
+      windowHeight: app.globalData.windowHeight
+    })
     this.setData({
       cat_id: option.cat_id
     })

@@ -1,4 +1,16 @@
+@import "/assets/iconfont/iconfont.wxss";
+
 .detail-header {
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  top: 0;
+  border-bottom: 1px solid #efefef;
+  background-color: white;
+  z-index: 100;
+}
+
+.detail-header .heaver-nav {
   width: calc(100% - 20%);
   margin: 0 10%;
   height: 100rpx;
@@ -11,6 +23,7 @@
   flex: 1;
   text-align: center;
   font-size: 28rpx;
+
 }
 
 .detail-header .active {
@@ -20,6 +33,7 @@
 .detail-swiper {
   width: 100%;
   height: 750rpx;
+  margin-top: 102rpx;
 }
 
 .detail-swiper .swiper,
@@ -300,4 +314,203 @@
   height: auto;
   font-size: 24rpx;
   padding: 10rpx;
+}
+
+.showMack {
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  z-index: 150;
+}
+
+.mack {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .8);
+  z-index: 111;
+}
+
+.showMack .mack-content {
+  width: 100%;
+  height: 100px;
+  display: flex;
+}
+
+.showMack .mack-content .img {
+  width: 30%;
+  height: 164rpx;
+  position: relative;
+}
+
+.showMack .mack-content .img image {
+  width: 164rpx;
+  height: 164rpx;
+  position: absolute;
+  top: -20px;
+  left: 20rpx;
+  border-radius: 20rpx;
+}
+
+.showMack .mack-content .img-detail {
+  width: 70%;
+  position: relative;
+}
+
+.showMack .mack-content .img-detail .icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50rpx;
+  height: 50rpx;
+  text-align: center;
+  font-weight: bold;
+}
+
+.showMack .mack-content .img-detail .title {
+  height: 90rpx;
+  margin: 30rpx 20rpx 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.showMack .mack-content .img-detail .mack-price {
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #f55;
+  font-size: 40rpx;
+}
+
+.showMack .mack-content .img-detail .mack-store {
+  font-size: 28rpx;
+  color: #ccc;
+}
+
+
+.showMack .input-num {
+  width: calc(100% - 20rpx);
+  height: 88rpx;
+  line-height: 88rpx;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10rpx;
+}
+
+.showMack .input-num .num {
+  color: #ccc;
+}
+
+.showMack .input-num .input {
+  display: flex;
+  border: 1px solid #efefef;
+}
+
+.showMack .input-num .input view {
+  width: 60rpx;
+  height: 100%;
+  text-align: center;
+}
+
+.showMack .input-num .input input {
+  width: 88rpx;
+  height: 100%;
+  text-align: center;
+  border-left: 1px solid #efefef;
+  border-right: 1px solid #efefef;
+}
+
+
+
+.showMack .btn {
+  width: 100%;
+  display: flex;
+
+}
+
+.showMack .btn view {
+  width: 50%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: white;
+}
+
+.showMack .btn .addCart {
+  background-color: #f55;
+}
+
+.showMack .btn .buy {
+  background-color: #f8c419f6;
+}
+
+/* 底部导航 */
+.footer-container {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  border-top: 1px solid #efefef;
+}
+
+.footer-container .footer-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  flex-direction: column;
+  position: relative;
+}
+
+.footer-container .footer-item .kf {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 99;
+  opacity: 0;
+}
+
+.footer-container .footer-item .buyNum {
+  min-width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  padding: 5rpx;
+  background: #f44;
+  color: #fff;
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 24rpx;
+  position: absolute;
+  right: 5rpx;
+  top: 5rpx;
+}
+
+.footer-container .footer-item .iconfont {
+  font-size: 40rpx;
+  color: #f55;
+}
+
+.footer-container .addcart {
+  flex: 2;
+  font-size: 28rpx;
+  background: #f44;
+  color: #fff;
+  height: 100%;
+}
+
+.footer-container .buy {
+  flex: 2;
+  font-size: 28rpx;
+  background: #ff976a;
+  color: #fff;
+  height: 100%;
 }

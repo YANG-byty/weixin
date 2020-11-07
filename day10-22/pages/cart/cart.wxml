@@ -1,2 +1,60 @@
-<!--pages/cart/cart.wxml-->
-<text>pages/cart/cart.wxml</text>
+<view class="cart-wrap">
+  <!-- 每个店铺 -->
+  <view class="card-goods">
+    <view class="card-shop-head">
+      <view class="card-goods-item">
+        <i class="iconfont icon-xuanzhong iconActive" wx:if="true"></i>
+        <i class="iconfont icon-Artboard" wx:else></i>
+      </view>
+      <view class="card-goods-item">
+        <span>创造旗舰店</span>
+        <em class="iconfont icon-arrow-left"></em>
+      </view>
+    </view>
+    <view class="goods-group" wx:for="{{cart}}" wx:key="index">
+      <view class="goods-item">
+        <i bindtap="checkedFn" data-index="{{index}}" class="iconfont icon-xuanzhong iconActive"
+          wx:if="{{item.isSelect}}"></i>
+        <i bindtap="checkedFn" data-index="{{index}}" class="iconfont icon-Artboard" wx:else></i>
+      </view>
+      <view class="goods-info">
+        <view class="goods-img" bindtap="toDetailFn" data-gid="{{item.goods_id}}">
+          <image src="{{item.goods_img}}" alt="商品" />
+        </view>
+        <view class="goods-content">
+          <view class="goods-title">
+            {{ item.goods_name }}
+          </view>
+          <view class="goods-dis">
+            <view class="goods-price">
+              <span>{{ item.shop_price }}</span>
+            </view>
+            <view class="goods-input">
+              <text class="refuce" bindtap="refuceFn" data-index='{{index}}'>-</text>
+              <input type="number" value="{{item.num}}" />
+              <text class="add" bindtap="addFn" data-index='{{index}}'>+</text>
+            </view>
+            <view class="oper-icon">
+              <i class="iconfont icon-xin"></i>
+              <i class="iconfont icon-shanchu" bindtap="removeFn" data-index="{{index}}"></i>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cart-submit">
+  <view class="chackAll">
+    <i catchtap="checkAllFn" wx:if="{{checkAlldate}}" class="iconfont icon-xuanzhong iconActive"></i>
+    <i catchtap="checkAllFn" wx:else class="iconfont icon-Artboard"></i>
+    <span class="all">全选</span>
+  </view>
+  <view class="van-text">
+    <p>
+      合计：<span>￥{{ totalPrice }}.00</span>
+    </p>
+    <p class="text">(不含运费，已节省 ￥0.00)</p>
+  </view>
+  <view class="van-btn">去结算({{ buyNum }})</view>
+</view>

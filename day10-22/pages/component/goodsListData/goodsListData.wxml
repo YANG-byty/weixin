@@ -1,0 +1,13 @@
+<view class="product-list">
+  <!-- <view class="list-child" wx:for="{{goodsList}}" wx:key="index"> -->
+  <view class="product-item" wx:for="{{goodsList}}" wx:key="index">
+    <navigator url="/pages/detail/detail?goods_id={{item.goods_id}}">
+      <view class="product-img">
+        <image src="{{item.goods_thumb}}"></image>
+      </view>
+      <view class="product-title">{{item.goods_name}}</view>
+      <view class="product-price">￥{{item.shop_price}}</view>
+    </navigator>
+  </view>
+  <!-- </view> -->
+</view>

@@ -1,108 +1,183 @@
-<view class="detail-header">
-  <view class="{{headerIndex==index?'active':''}}" bindtap="activeChange" data-index="{{index}}" wx:for="{{headerData}}"
-    wx:key="index">{{item}}</view>
-</view>
-<view class="detail-swiper">
-  <swiper class="swiper" autoplay="true" circular="true" indicator-dots='true'>
-    <swiper-item wx:for="{{detailDatas.gallery_list}}" wx:key="index">
-      <image src="{{item.img_url}}">
-      </image>
-    </swiper-item>
-  </swiper>
-</view>
+<import src="/wxParse/wxParse.wxml"></import>
+<scroll-view scroll-y="true" style="height:{{windowHeight}}px" bindscrolltolower="detailScrollFn"
+  bindscroll="scrollContentFn">
+  <view class="detail-header" id="detail-header">
+    <view class="heaver-nav">
+      <view class="{{headerIndex==index?'active':''}}" bindtap="activeChange" data-index="{{index}}"
+        wx:for="{{headerData}}" wx:key="index">{{item}}</view>
+    </view>
+  </view>
 
-
-<view class="detail-content">
-  <view class="area">
-    <view class="price">
-      <em>￥</em>
-      <span>{{ detailDatas.shop_price }}</span>
-      <s>{{ detailDatas.market_price_formated }}</s>
-    </view>
-    <view class="vip-warp">
-      <view class="text">
-        <i class="vip-img">
-          <image src="https://x.dscmall.cn/static/dist/img/icon-vip.png" alt="" />
-        </i>
-        <span>高级VIP享超值优惠价<em>￥</em><i>{{ detailDatas.shop_price }}</i></span>
+  <view class="detail-content">
+    <!-- 商品介绍 -->
+    <view id="detail0">
+      <view class="detail-swiper">
+        <swiper class="swiper" autoplay="true" circular="true" indicator-dots='true'>
+          <swiper-item wx:for="{{detailDatas.gallery_list}}" wx:key="index">
+            <image src="{{item.img_url}}">
+            </image>
+          </swiper-item>
+        </swiper>
       </view>
-      <view class="vip-register">
-        <a>
-          <span>立即开通</span>
-          <i class="iconfont icon-arrow-left"></i>
-        </a>
-      </view>
-    </view>
-    <view class="explain">
-      {{ detailDatas.goods_name }}
-    </view>
-    <view class="goods-outer">
-      <span>销量 {{ detailDatas.sales_volume }}</span>
-      <span>当前库存<em>{{ detailDatas.goods_number }}</em></span>
-      <span>上海市 上海市</span>
-    </view>
-    <view class="integral">
-      <span>服务:</span>
-      <em>正品保证 七天无理由退换 闪速配送</em>
-    </view>
-    <view class="integral">
-      <span>已选:</span>
-      <em>{{ detailDatas.shop_close }}{{detailDatas.goods_unit}}</em>
-    </view>
-    <view class="integral">
-      <span>运费:</span>
-      <em>{{ detailDatas.formated_goods_rate }}</em>
-    </view>
-    <view class="goods-info">
-      <view class="goods-create">
-        <view class="img">
-          <image src="https://x.dscmall.cn/storage/images/seller_imgs/seller_logo/logo_thumb/1598316246303568918.jpg"
-            style="width: 100%;height: 100%;border: 1px solid #ccc;padding: 6rpx;" alt="" />
+      <view class="area">
+        <view class="price">
+          <em>￥</em>
+          <span>{{ detailDatas.shop_price }}</span>
+          <s>{{ detailDatas.market_price_formated }}</s>
         </view>
-        <view class="create">
-          <view>
-            <span>创造旗舰店</span>
+        <view class="vip-warp">
+          <view class="text">
+            <i class="vip-img">
+              <image src="https://x.dscmall.cn/static/dist/img/icon-vip.png" alt="" />
+            </i>
+            <span>高级VIP享超值优惠价<em>￥</em><i>{{ detailDatas.shop_price }}</i></span>
           </view>
-          <p> 9 人关注</p>
+          <view class="vip-register">
+            <a>
+              <span>立即开通</span>
+              <i class="iconfont icon-arrow-left"></i>
+            </a>
+          </view>
         </view>
-        <view class="info-add">进店逛逛</view>
+        <view class="explain">
+          {{ detailDatas.goods_name }}
+        </view>
+        <view class="goods-outer">
+          <span>销量 {{ detailDatas.sales_volume }}</span>
+          <span>当前库存<em>{{ detailDatas.goods_number }}</em></span>
+          <span>{{detailDatas.basic_info.province_name}} {{detailDatas.basic_info.city_name}}</span>
+        </view>
+        <view class="integral">
+          <span>服务:</span>
+          <em>正品保证 七天无理由退换 闪速配送</em>
+        </view>
+        <view class="integral" bindtap="showMaskFn">
+          <span>已选:</span>
+          <em>{{ detailDatas.shop_close }}{{detailDatas.goods_unit}}</em>
+        </view>
+        <view class="integral">
+          <span>运费:</span>
+          <em>{{ detailDatas.formated_goods_rate }}</em>
+        </view>
+        <view class="goods-info">
+          <view class="goods-create">
+            <view class="img">
+              <image
+                src="https://x.dscmall.cn/storage/images/seller_imgs/seller_logo/logo_thumb/1598316246303568918.jpg"
+                style="width: 100%;height: 100%;border: 1px solid #ccc;padding: 6rpx;" alt="" />
+            </view>
+            <view class="create">
+              <view>
+                <span>创造旗舰店</span>
+              </view>
+              <p> 9 人关注</p>
+            </view>
+            <view class="info-add">进店逛逛</view>
+          </view>
+          <view class="goods-score">
+            <ul>
+              <li>
+                <span>商品<i class="color1">5分</i></span>
+                <em class="bg1">高</em>
+              </li>
+              <li>
+                <span>服务<i class="color2">5分</i></span>
+                <em class="bg2">高</em>
+              </li>
+              <li>
+                <span>时效<i class="color3">5分</i></span>
+                <em class="bg3">高</em>
+              </li>
+            </ul>
+          </view>
+        </view>
       </view>
-      <view class="goods-score">
-        <ul>
-          <li>
-            <span>商品<i class="color1">5分</i></span>
-            <em class="bg1">高</em>
-          </li>
-          <li>
-            <span>服务<i class="color2">5分</i></span>
-            <em class="bg2">高</em>
-          </li>
-          <li>
-            <span>时效<i class="color3">5分</i></span>
-            <em class="bg3">高</em>
-          </li>
-        </ul>
+    </view>
+
+    <!-- 商品详情 -->
+    <view id="detail1">
+      <!-- 详情 规格 -->
+      <view class="van-tabs">
+        <view class="van-tab">
+          <a href="javascript:;" class="{{flag?'active':''}}" bindtap="particularsFn">商品详情</a>
+        </view>
+        <view class="van-tab">
+          <a href="javascript:;" class="{{!flag?'active':''}}" bindtap="parameterFn">规格参数</a>
+        </view>
+      </view>
+      <view class="strImg" wx:if="{{flag}}">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+      <!-- 规格参数 -->
+      <view class="detail-table" wx:else>
+        <view class="detail-row" wx:for="{{detailDatas.attr_parameter}}" wx:key='index'>
+          <view>{{item.attr_name}}</view>
+          <view>{{item.attr_value}}</view>
+        </view>
       </view>
     </view>
-  </view>
-  <!-- 详情 规格 -->
-  <view class="van-tabs">
-    <view class="van-tab">
-      <a href="javascript:;" class="{{flag?'active':''}}" bindtap="particularsFn">商品详情</a>
-    </view>
-    <view class="van-tab">
-      <a href="javascript:;" class="{{!flag?'active':''}}" bindtap="parameterFn">规格参数</a>
+
+    <!-- 猜你喜欢 -->
+    <view id="detail2">
+      <view style=" text-align: center;line-height: 100rpx;font-size:14px;height:100rpx; background-color: #efefef;">
+        --猜你喜欢--</view>
+      <goodsListData goodsList="{{goodsList}}"></goodsListData>
     </view>
   </view>
-  <!-- <view class="van-tabs__content" v-html="detailLists.goods_desc"></view>
-  </view> -->
-  <view class="strImg" wx:if="{{flag}}">
-    <rich-text nodes="{{strDatas}}"></rich-text>
-  </view>
-  <view class="detail-table" wx:else>
-    <view class="detail-row" wx:for="{{detailDatas.attr_parameter}}" wx:key='index'>
-      <view>{{item.attr_name}}</view>
-      <view>{{item.attr_value}}</view>
+
+</scroll-view>
+
+<!-- 点击已选弹出动画 -->
+<view wx:if="{{mask}}" class="mack" bindtap="hiddenMaskFn"></view>
+<view class="showMack" wx:if="{{mask}}" animation="{{animationObj}}">
+  <view class="mack-content">
+    <view class="img">
+      <image
+        src="https://img14.360buyimg.com/n1/s800x800_jfs/t1/133212/38/7616/89755/5f3f62c6E92a5e4d2/6421cd03a11bf0f9.jpg">
+      </image>
     </view>
+    <view class="img-detail">
+      <view class="icon" bindtap="hiddenMaskFn">×</view>
+      <view class="title">苏泊尔（SUPOR）豆浆机破壁免滤双层不锈钢机身家用多功能豆浆机搅拌机料理机DJ12B-P65</view>
+      <view class="mack-price">170.00</view>
+      <view class="mack-store">库存： 500</view>
+    </view>
+  </view>
+  <view class="input-num">
+    <view class="num">数量</view>
+    <view class="input">
+      <view bindtap="changeNumFn" data-num="0">-</view>
+      <input type="text" value="{{num}}" />
+      <view bindtap="changeNumFn" data-num="1">+</view>
+    </view>
+  </view>
+  <view class="btn">
+    <view class="addCart" bindtap="addCartFn">加入购物车</view>
+    <view class="buy">立即购买</view>
+  </view>
+</view>
+
+<!-- 底部导航 -->
+<view class="footer-container">
+  <view class="footer-item">
+    <button class="kf" open-type="contact"></button>
+    <view class="iconfont icon-kefu">
+      <image src="/images/kf.png" style="width:44rpx;height:44rpx"></image>
+    </view>
+    <text>客服</text>
+  </view>
+  <view class="footer-item">
+    <view class="iconfont icon-xin"></view>
+    <text>收藏</text>
+  </view>
+  <view class="footer-item" bindtap="toDetailFn">
+    <view class="iconfont icon-gouwuche"></view>
+    <text>购物车</text>
+  </view>
+  <view class="footer-item addcart" bindtap="showMaskFn">
+    <text>加入购物车</text>
+  </view>
+  <view class="footer-item buy">
+    <text>立即购买</text>
   </view>
 </view>
