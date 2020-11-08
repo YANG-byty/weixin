@@ -1,7 +1,10 @@
 <view class="cart-wrap">
+  <navigator url="../productList/productList">
+    <view class="iconfont icon-right-angle"></view>
+  </navigator>
   <!-- 每个店铺 -->
   <view class="card-goods">
-    <view class="card-shop-head">
+    <!-- <view class="card-shop-head">
       <view class="card-goods-item">
         <i class="iconfont icon-xuanzhong iconActive" wx:if="true"></i>
         <i class="iconfont icon-Artboard" wx:else></i>
@@ -10,7 +13,7 @@
         <span>创造旗舰店</span>
         <em class="iconfont icon-arrow-left"></em>
       </view>
-    </view>
+    </view> -->
     <view class="goods-group" wx:for="{{cart}}" wx:key="index">
       <view class="goods-item">
         <i bindtap="checkedFn" data-index="{{index}}" class="iconfont icon-xuanzhong iconActive"
@@ -18,7 +21,7 @@
         <i bindtap="checkedFn" data-index="{{index}}" class="iconfont icon-Artboard" wx:else></i>
       </view>
       <view class="goods-info">
-        <view class="goods-img" bindtap="toDetailFn" data-gid="{{item.goods_id}}">
+        <view class="goods-img" bindtap="toDetailFn" data-gid="{{item.goods_id}}" data-num="{{item.num}}">
           <image src="{{item.goods_img}}" alt="商品" />
         </view>
         <view class="goods-content">
@@ -44,17 +47,23 @@
     </view>
   </view>
 </view>
-<view class="cart-submit">
+<view class="cart-submit" wx:if="{{nullFn}}">
   <view class="chackAll">
     <i catchtap="checkAllFn" wx:if="{{checkAlldate}}" class="iconfont icon-xuanzhong iconActive"></i>
     <i catchtap="checkAllFn" wx:else class="iconfont icon-Artboard"></i>
     <span class="all">全选</span>
   </view>
   <view class="van-text">
-    <p>
+    <view>
       合计：<span>￥{{ totalPrice }}.00</span>
-    </p>
-    <p class="text">(不含运费，已节省 ￥0.00)</p>
+    </view>
+    <view class="text">(不含运费，已节省 ￥0.00)</view>
   </view>
   <view class="van-btn">去结算({{ buyNum }})</view>
+</view>
+<view wx:else class="null">
+  <view>空空如也!</view>
+  <view bindtap="toIndexFn">
+    去逛逛吧!
+  </view>
 </view>

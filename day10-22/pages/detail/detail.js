@@ -23,12 +23,13 @@ Page({
     mask: false,
     animationObj: '',
     num: 1,
-    gid: 0
+    gid: 0,
+    buyNum: 0,
   },
 
   // 减减   加加
   changeNumFn(e) {
-    console.log(e.currentTarget.dataset.num);
+    var cartDatas = wx.getStorageSync('cartData') || [];
     if (e.currentTarget.dataset.num == 0) {
       if (this.data.num <= 1) {
         this.setData({
@@ -45,10 +46,18 @@ Page({
       }
     } else {
       this.setData({
-        num: this.data.num + 1
+        num: Number(this.data.num) + 1
       })
     }
-
+    // console.log(this.data.gid);
+    for (var i = 0; i < cartDatas.length; i++) {
+      if (cartDatas[i].goods_id == this.data.gid) {
+        // console.log(cartDatas[i]);
+        cartDatas[i].num = this.data.num;
+      }
+    }
+    wx.setStorageSync('cartData', cartDatas);
+    this.buyNumFn();
   },
 
   toDetailFn() {
@@ -64,7 +73,7 @@ Page({
     cartData.num = this.data.num;
     var gid = this.data.gid;
     var cartDatas = wx.getStorageSync('cartData') || [];
-    console.log(cartDatas);
+    // console.log(cartDatas);
 
     if (cartDatas.length > 0) {
       for (var i = 0; i < cartDatas.length; i++) {
@@ -98,7 +107,8 @@ Page({
       })
     }
     wx.setStorageSync('cartData', cartDatas);
-
+    this.hiddenMaskFn();
+    this.buyNumFn();
   },
 
   animationFn() {
@@ -200,7 +210,7 @@ Page({
 
   async detailFn(url, data, method) {
     let detailDatas = await requestApi(url, data, method);
-    // console.log(detailDatas);
+    console.log(detailDatas);
     var str = detailDatas.data.data.goods_desc;
     this.setData({
       detailDatas: detailDatas.data.data,
@@ -246,11 +256,33 @@ Page({
       this.scrollFn(page);
     }
   },
+  buyNumFn() {
+    var cartData = wx.getStorageSync('cartData');
+    var buyNum = 0;
+    for (var i = 0; i < cartData.length; i++) {
+      if (cartData[i].isSelect) {
+        buyNum += cartData[i].num;
+      }
+    }
+    this.setData({
+      buyNum: buyNum
+    })
+  },
+
 
   onLoad: function (options) {
+    this.buyNumFn();
+    console.log(options);
+    console.log(options.num);
+    if (options.num) {
+      this.setData({
+        num: options.num
+      })
+    }
     this.setData({
       windowHeight: app.globalData.windowHeight,
-      gid: options.goods_id
+      gid: options.goods_id,
+
     })
     // console.log(options);
     // https://x.dscmall.cn/api/goods/show

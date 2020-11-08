@@ -64,64 +64,6 @@ Component({
         scrollTop: e.detail.scrollTop
       })
     },
-
-    // 到达底部时触发
-    scrollBottomFn(e) {
-      console.log(this.data.scrollTop);
-      var leftIndex = this.data.leftIndex;
-      var length = this.data.LeftDatasLength;
-      if (leftIndex < length - 1) {
-        this.setData({
-          leftIndex: ++leftIndex
-        })
-        var touch_catads = this.data.categoryLeftDatas[leftIndex].touch_catads
-        var cat_id = this.data.categoryLeftDatas[leftIndex].cat_id;
-        var url = 'https://x.dscmall.cn/api/catalog/list/' + cat_id;
-
-        wx.showLoading({
-          title: '加载中...',
-        })
-        requestApi(url).then((res) => {
-          if (res.statusCode == 200) {
-            wx.hideLoading();
-            this.setData({
-              rightList: res.data.data,
-              touch_catads: touch_catads
-            })
-          }
-        });
-      }
-    },
-
-    // 到达顶部时触发
-    scrollTopFn() {
-      var leftIndex = this.data.leftIndex;
-      var touch_catads = this.data.categoryLeftDatas[leftIndex].touch_catads
-      var cat_id = this.data.categoryLeftDatas[leftIndex].cat_id;
-      var url = 'https://x.dscmall.cn/api/catalog/list/' + cat_id;
-      wx.showLoading({
-        title: '加载中...',
-      })
-      if (leftIndex == 0) {
-        this.setData({
-          leftIndex: 0
-        })
-      } else {
-        this.setData({
-          leftIndex: --leftIndex
-        })
-      }
-      requestApi(url).then((res) => {
-        if (res.statusCode == 200) {
-          this.setData({
-            rightList: res.data.data,
-            touch_catads: touch_catads,
-            scrollTop: 0
-          })
-          wx.hideLoading();
-        }
-      });
-    }
   },
   attached() {
     wx.showLoading({

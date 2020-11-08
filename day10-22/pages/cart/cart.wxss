@@ -182,3 +182,21 @@
 .iconActive {
   color: #f55;
 }
+
+.null {
+  width: 100%;
+  text-align: center;
+  font-size: 50rpx;
+  color: #ccc;
+  margin-top: 20%;
+}
+
+.null view:nth-child(2) {
+  font-size: 30rpx;
+  color: #f55;
+  width: 180rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border: 1px solid #f55;
+  margin: 30rpx auto;
+}

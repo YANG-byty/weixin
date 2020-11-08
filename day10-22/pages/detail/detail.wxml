@@ -52,7 +52,7 @@
           <em>正品保证 七天无理由退换 闪速配送</em>
         </view>
         <view class="integral" bindtap="showMaskFn">
-          <span>已选:</span>
+          <span>已选:{{num}}</span>
           <em>{{ detailDatas.shop_close }}{{detailDatas.goods_unit}}</em>
         </view>
         <view class="integral">
@@ -132,15 +132,14 @@
 <view class="showMack" wx:if="{{mask}}" animation="{{animationObj}}">
   <view class="mack-content">
     <view class="img">
-      <image
-        src="https://img14.360buyimg.com/n1/s800x800_jfs/t1/133212/38/7616/89755/5f3f62c6E92a5e4d2/6421cd03a11bf0f9.jpg">
+      <image src="{{detailDatas.goods_img}}">
       </image>
     </view>
     <view class="img-detail">
       <view class="icon" bindtap="hiddenMaskFn">×</view>
-      <view class="title">苏泊尔（SUPOR）豆浆机破壁免滤双层不锈钢机身家用多功能豆浆机搅拌机料理机DJ12B-P65</view>
-      <view class="mack-price">170.00</view>
-      <view class="mack-store">库存： 500</view>
+      <view class="title">{{detailDatas.goods_name}}</view>
+      <view class="mack-price">{{detailDatas.shop_price_formated}}</view>
+      <view class="mack-store">库存： {{ detailDatas.goods_number }}</view>
     </view>
   </view>
   <view class="input-num">
@@ -173,6 +172,7 @@
   <view class="footer-item" bindtap="toDetailFn">
     <view class="iconfont icon-gouwuche"></view>
     <text>购物车</text>
+    <view class="buyNum">{{buyNum}}</view>
   </view>
   <view class="footer-item addcart" bindtap="showMaskFn">
     <text>加入购物车</text>

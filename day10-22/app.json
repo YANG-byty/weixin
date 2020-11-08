@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/cart/cart",
-    "pages/cartgory/cartgory",
     "pages/index/index",
-    "pages/wode/wode",
+    "pages/cartgory/cartgory",
     "pages/faxian/faxian",
+    "pages/cart/cart",
+    "pages/wode/wode",
     "pages/productList/productList",
     "pages/detail/detail",
     "pages/logs/logs"
@@ -19,7 +19,8 @@
     "backgroundColor": "#efefef",
     "backgroundTextStyle": "#707070",
     "selectedColor": "#ff0000",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "images/home.png",

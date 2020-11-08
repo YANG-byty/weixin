@@ -1,5 +1,5 @@
 <view class="categoryHeader">
-  <view class="ch-left" wx:if="{{flag}}">
+  <view bindtap="toIndexFn" class="ch-left" wx:if="{{flag}}">
     <i class="iconfont icon-right-angle"></i>
   </view>
   <view class="ch-left" style="width:5%" wx:else>

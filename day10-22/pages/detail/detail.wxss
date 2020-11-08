@@ -317,6 +317,7 @@
 }
 
 .showMack {
+  width: 100%;
   position: absolute;
   bottom: 0;
   background-color: white;
@@ -370,7 +371,7 @@
 }
 
 .showMack .mack-content .img-detail .title {
-  height: 90rpx;
+  height: 88rpx;
   margin: 30rpx 20rpx 0 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -513,4 +514,13 @@
   background: #ff976a;
   color: #fff;
   height: 100%;
+}
+
+.buyNum {
+  position: absolute;
+  top: -10rpx;
+  right: 0;
+  padding: 4rpx;
+  background-color: #f55;
+  color: white;
 }

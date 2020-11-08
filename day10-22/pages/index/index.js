@@ -158,7 +158,7 @@ Page({
       title: '正在加载中...',
     })
     var cat_id = this.data.cat_id[this.data.swiperIndex];
-    var productDatas = this.data.productDatas;
+    // var productDatas = this.data.productDatas;
     wx.request({
       url: `https://x.dscmall.cn/api/catalog/goodslist`,
       method: "POST",

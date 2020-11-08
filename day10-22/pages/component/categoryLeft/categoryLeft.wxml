@@ -14,8 +14,7 @@
 <view class="categoryRight">
   <swiper vertical='true'>
     <swiper-item>
-      <scroll-view scroll-y='true' style="height:100%;" scroll-top="{{scrollTop}}" bindscroll="dragstartTop"
-        bindscrolltoupper="scrollTopFn" bindscrolltolower="scrollBottomFn">
+      <scroll-view scroll-y='true' style="height:100%;" scroll-top="{{scrollTop}}" bindscroll="dragstartTop">
         <view class="imgTop">
           <image src="{{touch_catads}}" alt="" />
         </view>

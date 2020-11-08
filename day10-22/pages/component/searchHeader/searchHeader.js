@@ -19,6 +19,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    toIndexFn() {
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+    }
   }
 })

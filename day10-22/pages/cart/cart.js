@@ -9,6 +9,7 @@ Page({
     totalPrice: 0,
     buyNum: 0,
     checkAlldate: true,
+    nullFn: false,
   },
 
   // 加加
@@ -108,29 +109,44 @@ Page({
     })
   },
 
+
+  toDetailFn(e) {
+    console.log(e.currentTarget.dataset);
+    wx.navigateTo({
+      url: '../detail/detail?goods_id=' + e.currentTarget.dataset.gid + "&num=" + e.currentTarget.dataset.num,
+    })
+  },
+
+  //删除
   removeFn(e) {
     var index = e.currentTarget.dataset.index;
     var cart = this.data.cart;
     wx.showModal({
       title: '提示',
       content: '亲，您确定要放弃该商品吗？',
-      success(res) {
+      success: (res) => {
         if (res.confirm) {
           cart.splice(index, 1);
           this.setData({
             cart: cart
           })
-          wx.setStorageSync('cartData', cart)
+          this.totalPrice();
+          if (wx.getStorageSync('cartData').length == 0) {
+            this.setData({
+              nullFn: false
+            })
+          }
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
     })
+
   },
-  toDetailFn(e) {
-    console.log(e.currentTarget.dataset.gid);
-    wx.navigateTo({
-      url: '../detail/detail?goods_id=' + e.currentTarget.dataset.gid,
+
+  toIndexFn() {
+    wx.switchTab({
+      url: '../index/index',
     })
   },
 
@@ -141,31 +157,35 @@ Page({
     this.setData({
       cart: wx.getStorageSync('cartData')
     })
-
     this.totalPrice();
     this.checkAll();
-
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      cart: wx.getStorageSync('cartData')
+    })
+    if (wx.getStorageSync('cartData').length >= 1) {
+      console.log(123);
+      this.setData({
+        nullFn: true
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
