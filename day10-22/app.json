@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/cartgory/cartgory",
+    "pages/index/index",
     "pages/faxian/faxian",
     "pages/cart/cart",
     "pages/wode/wode",

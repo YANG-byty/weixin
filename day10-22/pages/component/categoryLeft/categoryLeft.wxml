@@ -11,7 +11,7 @@
 </view>
 
 <!-- 分类页面的右边部分 -->
-<view class="categoryRight">
+<view class="categoryRight" bindtouchstart="touchstartFn" bindtouchmove="touchmoveFn" bindtouchend="touchendFn">
   <swiper vertical='true'>
     <swiper-item>
       <scroll-view scroll-y='true' style="height:100%;" scroll-top="{{scrollTop}}" bindscroll="dragstartTop">

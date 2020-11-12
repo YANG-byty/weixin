@@ -1,4 +1,6 @@
-var { requestApi } = require('../../../utils/request');
+var {
+  requestApi
+} = require('../../../utils/request');
 
 
 Component({
@@ -20,6 +22,7 @@ Component({
     touch_catads: '',
     LeftDatasLength: 0,
     scrollTop: 0,
+    startPageY: 0,
   },
 
   /**
@@ -35,7 +38,6 @@ Component({
     },
     // 点击左边分类左边部分
     categoryLeFn(e) {
-
       wx.showLoading({
         title: '加载中...',
       })
@@ -43,26 +45,55 @@ Component({
         leftIndex: e.currentTarget.dataset.index,
         touch_catads: this.data.categoryLeftDatas[e.currentTarget.dataset.index].touch_catads
       })
-
       var cat_id = e.currentTarget.dataset.cat_id;
       var url = 'https://x.dscmall.cn/api/catalog/list/' + cat_id;
-
       requestApi(url).then((res) => {
         if (res.statusCode == 200) {
           wx.hideLoading();
           this.setData({
             rightList: res.data.data,
-            scrollTop: 2,
+            scrollTop: 0,
           })
         }
       });
-      // console.log(this.data.scrollTop);
-
     },
     dragstartTop(e) {
       this.setData({
         scrollTop: e.detail.scrollTop
       })
+    },
+
+    touchstartFn(e) {
+      this.setData({
+        startPageY: e.changedTouches[0].pageY
+      })
+    },
+    async touchendFn(e) {
+      var startPageY = this.data.startPageY;
+      var endPageY = e.changedTouches[0].pageY;
+      var pageY = endPageY - startPageY;
+      if (this.data.scrollTop == 0 && pageY >= 200) {
+        var leftIndex = this.data.leftIndex;
+        if (leftIndex >= 1) {
+          wx.showLoading({
+            title: '加载中...',
+          })
+          this.setData({
+            leftIndex: --leftIndex,
+            touch_catads: this.data.categoryLeftDatas[leftIndex].touch_catads
+          })
+          var cat_id = this.data.categoryLeftDatas[leftIndex].cat_id;
+          var url = 'https://x.dscmall.cn/api/catalog/list/' + cat_id;
+          var data = await requestApi(url);
+          if (data.statusCode == 200) {
+            this.setData({
+              rightList: data.data.data,
+            }, () => {
+              wx.hideLoading();
+            })
+          }
+        }
+      }
     },
   },
   attached() {
@@ -88,7 +119,6 @@ Component({
             rightList: res.data.data
           })
         }
-
       }
     })
   }
